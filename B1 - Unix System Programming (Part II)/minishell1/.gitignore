@@ -1,0 +1,8 @@
+
+*.o
+*.html
+*.json
+*.gcda
+*.gcno
+NormEZ.rb
+a.out
