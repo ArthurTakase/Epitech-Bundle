@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+from argparse import ArgumentParser, Namespace
+from math import sin, pi
+
+
+def get_borwein(n: int, x: float) -> float:
+    res: float = 1.0
+    i: int = 0
+
+    if x == 0:
+        return res
+    while i <= n:
+        res *= sin(x / (2 * i + 1)) / (x / (2 * i + 1))
+        i += 1
+    return res
+
+
+def midpoint_method(n: int) -> float:
+    result: float = 0.0
+    i: float = 0.0
+
+    while i < 5000:
+        result += get_borwein(n, (i + i + 0.5) / 2) * 0.5
+        i += 0.5
+
+    return result
+
+
+def trapezoidal_method(n: int) -> float:
+    result: float = 0.0
+    i: float = 0.0
+
+    while i < 5000:
+        part_un: float = get_borwein(n, i) + get_borwein(n, i + 0.5)
+        part_deux: float = part_un * 0.5
+        result += part_deux / 2
+        i += 0.5
+
+    return result
+
+
+def simpson_method(n: int) -> float:
+    result: float = 0.0
+    i: float = 0.0
+
+    while i < 5000:
+        part_un: float = get_borwein(n, i) + 4 * get_borwein(n, (i + (i + 0.5)) / 2)
+        part_deux: float = part_un + get_borwein(n, i + 0.5)
+        result += (((i + 0.5) - i) / 6) * part_deux
+        i += 0.5
+
+    return result
+
+
+def print_rule(form: str, value: float) -> None:
+    print(f"{form}:")
+    print(f"I0 = {value:.10f}")
+    print(f"diff = {pi / 2 - value:.10f}")
+    if form != "Simpson":
+        print()
+
+
+def get_args() -> Namespace:
+    parser: ArgumentParser = ArgumentParser()
+
+    parser.add_argument(
+        "n", type=int, help="constant defining the integral to be computed"
+    )
+
+    try:
+        args: Namespace = parser.parse_args()
+    except SystemExit:
+        exit(84)
+
+    return args
+
+
+def main() -> int:
+    args: Namespace = get_args()
+
+    print_rule("Midpoint", midpoint_method(args.n))
+    print_rule("Trapezoidal", trapezoidal_method(args.n))
+    print_rule("Simpson", simpson_method(args.n))
+
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())

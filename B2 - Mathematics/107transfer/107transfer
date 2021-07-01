@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+from argparse import ArgumentParser, Namespace
+from sys import argv
+from typing import List
+
+
+def usage() -> int:
+    print(
+        """USAGE
+    ./107transfer [num dem]*
+DESCRIPTION
+    num     polynomial numerator defined by its coefficients
+    dem     polynomial denominator defined by its coefficients"""
+    )
+    return 0
+
+
+def get_polynom(formule: str) -> List[int]:
+    split_arg: List[str] = formule.split("*")
+    polynom: List[int] = []
+
+    try:
+        for i in range(len(split_arg)):
+            polynom.append(int(split_arg[i]))
+    except:
+        print(f"Error: {formule} n'est pas un bon argument.")
+        exit(84)
+
+    return polynom
+
+
+def calcul(polynom: List[int], x: float, pos: int = 0) -> float:
+    if pos == len(polynom) - 1:
+        return polynom[pos]
+    else:
+        return polynom[pos] + x * calcul(polynom, x, pos + 1)
+
+
+def transfer(args: List[List[int]]) -> None:
+    x: float = 0
+    result: float = 1.0
+    quotient: float = 0.0
+
+    while x <= 1.001:
+        result = 1
+        for i in range(int(len(args) / 2)):
+            quotient = calcul(args[(i * 2) + 1], x)
+            if quotient == 0:
+                exit(84)
+            result = result * (calcul(args[i * 2], x) / quotient)
+        print(f"{x:.3f} -> {result:.5f}")
+        x += 0.001
+
+
+def get_args() -> List[List[int]]:
+    parser: ArgumentParser = ArgumentParser()
+    parse_list: List[List[int]] = []
+
+    parser.add_argument("formules", type=str, nargs="+")
+
+    try:
+        args: Namespace = parser.parse_args()
+        for i in range(len(args.formules)):
+            parse_list.append(get_polynom(args.formules[i]))
+    except SystemExit:
+        exit(84)
+
+    return parse_list
+
+
+def main() -> int:
+    if "-h" in argv:
+        return usage()
+    if (len(argv) - 1) % 2 != 0:
+        print("Mauvais nombre d'arguments")
+        return 84
+    args: List[List[int]] = get_args()
+    transfer(args)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())

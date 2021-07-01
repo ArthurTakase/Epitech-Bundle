@@ -1,0 +1,209 @@
+#!/usr/bin/env python3
+from sys import argv
+
+class matrix:
+    def __init__(self, number:int):
+        self.matrice = []
+        self.new = []
+        self.line = 0
+        self.column = 0
+        self.number = number
+
+    def reset(self, num:int):
+        self.__init__(num)
+
+    def copy(self, another):
+        for i in range(len(another.matrice)):
+            for j in range(len(another.matrice[0])):
+                self.add(another.matrice[i][j])
+
+    def add(self, number:int):
+        if self.column == 0:
+            self.new = []
+            for i in range(self.number):
+                self.new.append(0)
+        self.new[self.column] = number
+        self.column += 1
+        if (self.column == self.number):
+            self.matrice.append(self.new)
+            self.column = 0
+            self.line += 1
+
+    def print_matrix(self, state:bool=False, n:int=3):
+        end_line = "\t"
+        for i in range(len(self.matrice)):
+            for j in range(len(self.matrice[0])):
+                if j == self.number - 1:
+                    end_line = ""
+                if (state == True):
+                    print(f"{round(self.matrice[i][j], n)}{end_line}", end="")
+                else:
+                    print(f"{round(self.matrice[i][j])}{end_line}", end="")
+            end_line = "\t"
+            print()
+
+    def print_matrix_line(self):
+        end_line = " "
+        for i in range(len(self.matrice)):
+            for j in range(len(self.matrice[0])):
+                if i == len(self.matrice) - 1 and j == len(self.matrice[0]) - 1:
+                    end_line = "\n"
+                print(f"{self.matrice[i][j]}{end_line}", end="")
+
+    def get_det(self, n):
+        det = 0
+        if (self.number == 2 or n == 2):
+            det = self.matrice[0][0] * self.matrice[1][1] - self.matrice[1][0] * self.matrice[0][1]
+        else:
+            det = self.matrice[0][0] * self.matrice[1][1] * self.matrice[2][2]
+            det += self.matrice[0][1] * self.matrice[1][2] * self.matrice[2][0]
+            det += self.matrice[0][2] * self.matrice[1][0] * self.matrice[2][1]
+            det -= self.matrice[2][0] * self.matrice[1][1] * self.matrice[0][2]
+            det -= self.matrice[2][1] * self.matrice[1][2] * self.matrice[0][0]
+            det -= self.matrice[2][2] * self.matrice[1][0] * self.matrice[0][1]
+        return det
+
+    def transpose(self):
+        new_matrix = matrix(self.number)
+        for i in range(self.number):
+            for j in range(self.number):
+                new_matrix.add(0)
+        for i in range(self.number):
+            for j in range(self.number):
+                new_matrix.matrice[i][j] = self.matrice[j][i]
+        self.matrice = new_matrix.matrice
+
+    def to_string(self):
+        for i in range(len(self.matrice)):
+            for j in range(len(self.matrice[0])):
+                print(chr(int(self.matrice[i][j])), end="")
+
+def comatrix(first:matrix)->matrix:
+    matrix_cpy = matrix(len(first.matrice))
+    new_matrix = matrix(len(first.matrice))
+    for i in range(first.number):
+        for j in range(first.number):
+            matrix_cpy = matrix(len(first.matrice))
+            matrix_cpy.copy(first)
+            matrix_cpy.matrice.pop(i)
+            for k in range(len(first.matrice) - 1):
+                matrix_cpy.matrice[k].pop(j)
+            new_matrix.add(pow(-1, i + 1 + j + 1) * matrix_cpy.get_det(2))
+    return new_matrix
+
+def multiply(A:matrix, B:matrix)->matrix:
+    new_matrix = matrix(A.number)
+    for i in range(len(A.matrice)):
+        for j in range(len(B.matrice[0])):
+            new_matrix.add(0)
+    for i in range(len(A.matrice)):
+        for j in range(len(B.matrice[0])):
+            for k in range(len(A.matrice[0])):
+                new_matrix.matrice[i][j] += A.matrice[i][k] * B.matrice[k][j]
+    return new_matrix
+
+def mul_scalar(A:matrix, f:float)->matrix:
+    new_matrix = matrix(len(A.matrice))
+    for i in range(len(A.matrice)):
+        for j in range(len(A.matrice[0])):
+            new_matrix.add(f * A.matrice[i][j] + 0)
+    return new_matrix
+
+def round_that(A:matrix)->matrix:
+    new_matrix = matrix(len(A.matrice))
+    for i in range(len(A.matrice)):
+        for j in range(len(A.matrice[0])):
+            new_matrix.add(round(A.matrice[i][j]))
+    return new_matrix
+
+def usage():
+    print("""USAGE
+    ./103cipher message key flag
+
+DESCRIPTION
+    message a message, made of ASCII characters
+    key the encryption key, made of ASCII characters
+    flag 0 for the message to be encrypted, 1 to be decrypted""")
+    return 0
+
+def convert_function(n:int):
+    if (n == 0):
+        if len(argv[2]) <= 4:
+            max_key = 4
+            convert_key = matrix(2)
+            convert_msg = matrix(2)
+        else:
+            max_key = 9
+            convert_key = matrix(3)
+            convert_msg = matrix(3)
+        for i in range(max_key):
+            try:
+                convert_key.add(ord(argv[2][i]))
+            except:
+                convert_key.add(0)
+        for i in range(len(argv[1])):
+            convert_msg.add(ord(argv[1][i]))
+        x = len(argv[1])
+        while x % 3 != 0:
+            convert_msg.add(0)
+            x += 1
+        return convert_key, convert_msg
+    elif (n == 1):
+        if len(argv[2]) <= 4:
+            max_key = 4
+            convert_key = matrix(2)
+            convert_msg = matrix(2)
+        else:
+            max_key = 9
+            convert_key = matrix(3)
+            convert_msg = matrix(3)
+        for i in range(max_key):
+            try:
+                convert_key.add(ord(argv[2][i]))
+            except:
+                convert_key.add(0)
+        convert_list = list(argv[1].split(" "))
+        for i in convert_list:
+            convert_msg.add(int(i))
+        x = len(convert_list)
+        while x % 3 != 0:
+            convert_msg.add(0)
+            x += 1
+        return convert_key, convert_msg
+
+def choice():
+    if argv[3] == "0":
+        convert = convert_function(0)
+        encrypt = multiply(convert[1],convert[0])
+        print("Key matrix:")
+        convert[0].print_matrix()
+        print("\nEncrypted message:")
+        encrypt.print_matrix_line()
+        return 0
+    if argv[3] == "1":
+        convert = convert_function(1)
+        new_key = comatrix(convert[0])
+        new_key.transpose()
+        new_key = mul_scalar(new_key, 1/convert[0].get_det(0))
+        print("Key matrix:")
+        new_key.print_matrix(True)
+        decrypt = multiply(convert[1], new_key)
+        decrypt = round_that(decrypt)
+        print("\nDecrypted message:")
+        decrypt.to_string()
+        return 0
+    return 84
+
+def main():
+    if len(argv) == 2 and argv[1] == "-h":
+        return usage()
+    if len(argv) != 4:
+        return 84
+    #try : 
+    return choice()
+    #except :
+        #print("error")
+        #return 84
+
+if __name__ == "__main__":
+    exit(main())

@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+from sys import argv
+from math import pow
+
+
+# -----------------------------------------------------------------------------
+def usage() -> int:
+    print("""USAGE
+    ./105torus opt a0 a1 a2 a3 a4 n
+DESCRIPTION
+    opt\t\tmethod option:
+    \t\t\t1 for the bisection method
+    \t\t\t2 for Newton’s method
+    \t\t\t3 for the secant method
+    a[0-4]\tcoefficients of the equation
+    n\t\tprecision (the application of the polynomial to the solution should be smaller than 10ˆ-n)""")
+    return 0
+
+
+# -----------------------------------------------------------------------------
+def calc_function(x: float) -> float:
+    return int(argv[6]) * x**4 + int(argv[5]) * x**3 + int(argv[4]) * x**2 + int(argv[3]) * x + int(argv[2])
+
+
+# -----------------------------------------------------------------------------
+def deriv(x: float) -> float:
+    return 4 * int(argv[6]) * x**3 + 3 * int(argv[5]) * x**2 + 2 * int(argv[4]) * x + int(argv[3])
+
+
+# -----------------------------------------------------------------------------
+def bisection(a0: int, a1: int, a2: int, a3: int, a4: int, n: int) -> int:
+    top: int = 1
+    bottom: int = 0
+    middle: float = 0.0
+    number: int = 1
+
+    while (abs(top - bottom) > pow(10, -(n))):
+        try :
+            result: float = calc_function(middle)
+        except :
+            return 84
+        if (result < 0) :
+            bottom = middle
+        else :
+            top = middle
+        middle = (bottom + top) / 2
+
+        if number <= n:
+            print(f"x = {middle:.{number}f}")
+            number += 1
+        else:
+            print(f"x = {middle:.{n}f}")
+    return 0
+
+
+# -----------------------------------------------------------------------------
+#                                   EN COURS
+def newton(a0: int, a1: int, a2: int, a3: int, a4: int, n: int) -> int:
+    temp_x: float = 0.5
+    try :
+        x: float = temp_x - calc_function(temp_x) / deriv(temp_x)
+    except :
+        return 84
+
+    print(f"x = {temp_x}")
+    while round(calc_function(x), n) != 0:
+        print(f"x = {x:.{n}f}")
+        temp_x = x
+        try :
+            x = temp_x - calc_function(temp_x) / deriv(temp_x)
+        except :
+            return 84
+    print(f"x = {x:.{n}f}")
+    return 0
+
+
+# -----------------------------------------------------------------------------
+#                           AFFICHAGE A COMPLETER
+def secant(a0: int, a1: int, a2: int, a3: int, a4: int, n: int) -> int:
+    res_x: int = 1
+    xk: int = 1
+    xk1: int = 0
+
+    while (round(calc_function(res_x), n - 1) != 0):
+        try :
+            res_x = xk - (xk - xk1) / (calc_function(xk) - calc_function(xk1)) * calc_function(xk)
+        except :
+            return 84
+        xk1 = xk
+        xk = res_x
+        print(f"x = {res_x:.{n}f}")
+    return 0
+
+
+# -----------------------------------------------------------------------------
+def handle_error() -> int:
+    if len(argv) != 8:
+        return 84
+    for i in range(1, 8):
+        try :
+            int(argv[i])
+        except:
+            return 84
+    if argv[1] not in ["1", "2", "3"]:
+        return 84
+    if int(argv[7]) <= 0 :
+        return 84
+    return 0 # Tout est bon
+
+
+# -----------------------------------------------------------------------------
+def main() -> int:
+    if "-h" in argv:
+        return usage()
+    if handle_error():
+        return 84
+
+    a0 = int(argv[2])
+    a1 = int(argv[3])
+    a2 = int(argv[4])
+    a3 = int(argv[5])
+    a4 = int(argv[6])
+    n = int(argv[7])
+
+    function_list = [bisection, newton, secant]
+    return function_list[int(argv[1]) - 1](a0, a1, a2, a3, a4, n)
+
+
+if __name__ == "__main__":
+    exit(main())

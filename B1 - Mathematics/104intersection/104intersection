@@ -1,0 +1,141 @@
+#!/usr/bin/env python3
+from sys import argv
+from math import sqrt, tan, pi
+
+
+# -------- Fonction donnant le resultat d'une équation du second degré --------
+def second_degre(a: int, b: int, c: int) -> str:
+    delta = b**2 - 4 * a * c
+    if delta < 0:
+        return "no", "no"
+    elif delta == 0:
+        t = -(b / (2 * a))
+        return t, "no"
+    else:
+        t1 = (-b + sqrt(delta)) / (2 * a)
+        t2 = (-b - sqrt(delta)) / (2 * a)
+        return t1, t2
+
+
+# ------------------------ Calculs finaux des fonctions -----------------------
+def final_calcul(ox: int, oy: int, oz: int, vx: int, vy: int, vz: int, t: int):
+    if t[0] == "no":
+        print("No intersection point.")
+    elif t[1] == "no":
+        x1 = vx * t[0] + ox
+        y1 = vy * t[0] + oy
+        z1 = vz * t[0] + oz
+
+        print("1 intersection point:")
+        print(f"({x1:.3f}, {y1:.3f}, {z1:.3f})")
+    else:
+        x1 = vx * t[0] + ox
+        y1 = vy * t[0] + oy
+        z1 = vz * t[0] + oz
+
+        x2 = vx * t[1] + ox
+        y2 = vy * t[1] + oy
+        z2 = vz * t[1] + oz
+
+        print("2 intersection points:")
+        print(f"({x1:.3f}, {y1:.3f}, {z1:.3f})\n({x2:.3f}, {y2:.3f}, {z2:.3f})")
+
+
+# --------------------- Calculs dans le cas d'une sphère ----------------------
+def sphere(ox: int, oy: int, oz: int, vx: int, vy: int, vz: int, r: int):
+    a = vx**2 + vy**2 + vz**2
+    b = 2 * (vx*ox + vy*oy + vz*oz)
+    c = ox**2 + oy**2 + oz**2 - r**2
+
+    print(f"Sphere of radius {r}")
+    print(f"Line passing through the point ({ox}, {oy}, {oz}) and parallel to the vector ({vx}, {vy}, {vz})")
+
+    final_calcul(ox, oy, oz, vx, vy, vz, second_degre(a, b, c))
+
+
+# --------------------- Calculs dans le cas d'un cylindre ---------------------
+def cylinder(ox: int, oy: int, oz: int, vx: int, vy: int, vz: int, r: int):
+    a = vx**2 + vy**2
+    b = 2 * (vx * ox + vy * oy)
+    c = ox**2 + oy**2 - r**2
+
+    print(f"Cylinder of radius {r}")
+    print(f"Line passing through the point ({ox}, {oy}, {oz}) and parallel to the vector ({vx}, {vy}, {vz})")
+
+    if sqrt( (ox)**2 + (oy)**2 ) == r:
+        if vx == vy == 0 and vz != 0:
+            print("There is an infinite number of intersection points.")
+            return
+
+    try:
+        final_calcul(ox, oy, oz, vx, vy, vz, second_degre(a, b, c))
+    except:
+        print("There is an infinite number of intersection points.")
+        
+
+# ----------------------- Calculs dans le cas d'un cône -----------------------
+def cone(ox: int, oy: int, oz: int, vx: int, vy: int, vz: int, r: int):
+    print(f"Cone with a {r} degree angle")
+
+    r = float((pi / 2) - (r * pi / 180))
+    a = vx**2 + vy**2 - ((vz**2)/(tan(r)**2))
+    b = 2 * (vx * ox + vy * oy) - ((2*vz*oz)/(tan(r)**2))
+    c = ox**2 + oy**2 - ((oz**2)/(tan(r)**2))
+
+    print(f"Line passing through the point ({ox}, {oy}, {oz}) and parallel to the vector ({vx}, {vy}, {vz})")
+
+    try:
+        final_calcul(ox, oy, oz, vx, vy, vz, second_degre(a, b, c))
+    except:
+        print("There is an infinite number of intersection points.")
+
+
+# -------------------------------- Print du -h --------------------------------
+def usage() -> int:
+    print("""USAGE
+    ./104intersection opt xp yp zp xv yv zv p
+DESCRIPTION
+    opt             surface option: 1 for a sphere, 2 for a cylinder, 3 for a cone
+    (xp, yp, zp)    coordinates of a point by which the light ray passes through
+    (xv, yv, zv)    coordinates of a vector parallel to the light ray
+    p               parameter: radius of the sphere, radius of the cylinder, or
+                    angle formed by the cone and the Z-axis""")
+    return 0
+
+
+# --- Gestion des erreurs dans l'execution de la commande par l'utilisateur ---
+def handle_error() -> int:
+    if len(argv) != 9: # Nombre d'arguments
+        return 1
+    for i in range(1, len(argv)): # Tous les arguments sont des int
+        try:
+            x = int(argv[i])
+        except:
+            return 1
+    if argv[1] not in ["1", "2", "3"]: # La figure existe
+        return 1
+    if int(argv[8]) <= 0: # Le rayon n'est pas négatif
+        return 1
+    if not (0 < int(argv[8]) < 90) and argv[1] == "3": # L'angle n'est pas entre 0 et 90
+        return 1
+    return 0 # Tout est bon
+
+
+# ----------------- Fonction principale, execution des autres -----------------
+def main() -> int:
+    if "-h" in argv:
+        return usage()
+    if handle_error():
+        return 84
+    
+    ox, oy, oz = int(argv[2]), int(argv[3]), int(argv[4])
+    vx, vy, vz = int(argv[5]), int(argv[6]), int(argv[7])
+    r = int(argv[8])
+
+    functions = [sphere, cylinder, cone]
+    functions[int(argv[1]) - 1](ox, oy, oz, vx, vy, vz, r)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())

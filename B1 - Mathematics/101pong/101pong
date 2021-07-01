@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+from sys import argv
+from math import sqrt, pi, acos
+
+# displays instructions for the program
+def usage():
+    print("""USAGE
+    ./101pong x0 y0 z0 x1 y1 z1 n
+
+DESCRIPTION
+    x0 ball abscissa at time t - 1
+    y0 ball ordinate at time t - 1
+    z0 ball altitude at time t - 1
+    x1 ball abscissa at time t
+    y1 ball ordinate at time t
+    z1 ball altitude at time t
+    n time shift (greater than or equal to zero, integer)""")
+
+# Main function. Launching of the various operations + rebound management
+def calcul(x, y, z, x1, y1, z1, t):
+    v_x = x1 - x
+    v_y = y1 - y
+    v_z = z1 - z
+    print(f"""The velocity vector of the ball is:\n({v_x + 0:.2f}, {v_y + 0:.2f}, {v_z + 0:.2f})""")
+    pos_x = (v_x * t) + x1
+    pos_y = (v_y * t) + y1
+    pos_z = (v_z * t) + z1
+    print(f"""At time t + {t}, ball coordinates will be:\n({pos_x + 0:.2f}, {pos_y + 0:.2f}, {pos_z + 0:.2f})""")
+    if ((v_z < 0 and z1 > 0) or (v_z > 0 and z1 < 0)) :        
+        norm = sqrt(v_x**2 + v_y**2 + v_z**2)
+        incidence_angle_rad = acos(sqrt(v_z**2) / norm)
+        incidence_angle = incidence_angle_rad * (180 / pi)
+        angle = abs(90 - incidence_angle)
+        print(f"""The incidence angle is:\n{angle + 0:.2f} degrees""")
+    else :
+        print("The ball won't reach the paddle.")
+
+# Error handling + value conversion
+def main():
+    if  len(argv) != 8:
+        if len(argv) == 2 and argv[1] == "-h":
+            usage()
+        return 84
+    x, y, z = float(argv[1]), float(argv[2]), float(argv[3])
+    x1, y1, z1 = float(argv[4]), float(argv[5]), float(argv[6])
+    t = int(argv[7])
+    if t < 0 :
+        return 84
+    calcul(x, y, z, x1, y1, z1, t)
+
+if __name__ == "__main__":
+    exit(main())

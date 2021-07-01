@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+from sys import argv
+from math import cos, sin, radians
+
+def usage():
+    print("""USAGE
+    ./102architect x y transfo1 arg11 [arg12] [transfo2 arg12 [arg22]] ...
+
+DESCRIPTION
+    x abscissa of the original point
+    y ordinate of the original point
+
+    transfo arg1 [arg2]
+    -t i j translation along vector (i, j)
+    -z m n scaling by factors m (x-axis) and n (y-axis)
+    -r d rotation centered in O by a d degree angle
+    -s d reflection over the axis passing through O with an inclination angle of d degrees""")
+    return 0
+
+
+
+class matrix:
+    def __init__(self):
+        self.matrix:list(list(int), list(int), list(int)) = [[0,0,0],[0,0,0],[0,0,0]]
+    
+    def app(self, i, j, num):
+        self.matrix[i][j] = num
+
+    def print_matrix(self):
+        for row in range(3):
+            for col in range(3):
+                print(f"{self.matrix[row][col] + 0.0:.2f}\t", end='')
+            print()
+    
+    def reset_matrix(self):
+        for row in range(3):
+            for col in range(3):
+                self.matrix[row][col] = 0
+
+def multiply(first:matrix, second:matrix) -> matrix:
+    new_matrix:matrix = matrix()
+    for i in range(3):
+        for j in range(3):
+            for k in range(3):
+                new_matrix.matrix[i][j] += first.matrix[i][k] * second.matrix[k][j]
+    return new_matrix
+
+def main_loop(argv):
+    matrice = matrix()
+    final = matrix()
+    final.app(0,0,1)
+    final.app(1,1,1)
+    final.app(2,2,1)
+    x = int(argv[1])
+    y = int(argv[2])
+    result_x = x
+    result_y = y
+    for e in range(len(argv)):
+        matrice.reset_matrix()
+        matrice.app(2,2,1)
+        if argv[e] == "-t":
+            i = int(argv[e + 1])
+            j = int(argv[e + 2])
+            print(f"Translation along vector ({i}, {j})")
+            matrice.app(0,0,1)
+            matrice.app(1,1,1)
+            matrice.app(0,2,i)
+            matrice.app(1,2,j)
+            result_x += i
+            result_y += j
+        if argv[e] == "-z":
+            m = int(argv[e + 1])
+            n = int(argv[e + 2])
+            print(f"Scaling by factors {m} and {n}")
+            matrice.app(0,0,m)
+            matrice.app(1,1,n)
+            result_x *= m
+            result_y *= n
+        if argv[e] == "-r":
+            matrice.reset_matrix()
+            matrice.app(0,0,1)
+            matrice.app(1,1,1)
+            matrice.app(2,2,1)
+            d = int(argv[e + 1])
+            print(f"Rotation by a {d} degree angle")
+            array = [cos(radians(d)), sin(radians(d)),
+                    -sin(radians(d)), cos(radians(d))]            
+            matrice.app(0,0,array[0])
+            matrice.app(1,0,array[1])
+            matrice.app(0,1,array[2])
+            matrice.app(1,1,array[3])
+            temp_y = result_y
+            result_y = array[1] * result_x + array[3] * result_y
+            result_x = array[0] * result_x + array[2] * temp_y
+        if argv[e] == "-s":
+            matrice.reset_matrix()
+            matrice.app(0,0,1)
+            matrice.app(1,1,1)
+            matrice.app(2,2,1)
+            d = int(argv[e + 1])
+            print(f"Reflection over an axis with an inclination angle of {d} degrees")
+            array = [cos(radians(2*d)), sin(radians(2*d)),
+                    sin(radians(2*d)), -cos(radians(2*d))]
+            matrice.app(0,0,array[0])
+            matrice.app(1,0,array[1])
+            matrice.app(0,1,array[2])
+            matrice.app(1,1,array[3])
+            temp_y = result_y
+            result_y = array[1] * result_x + array[3] * result_y
+            result_x = array[0] * result_x + array[2] * temp_y
+        if argv[e] in ["-t", "-r", "-s", "-z"]:
+            final = multiply(matrice, final) 
+    final.print_matrix()
+    print(f"({x + 0.0:.2f}, {y + 0.0:.2f}) => ({result_x + 0.0:.2f}, {result_y + 0.0:.2f})")
+
+
+def main():
+    if len(argv) == 2 and argv[1] == "-h":
+        return usage()
+    if len(argv) < 4:
+        return 84
+    main_loop(argv)
+
+if __name__ == "__main__":
+    exit(main())

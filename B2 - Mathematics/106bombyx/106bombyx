@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+from argparse import ArgumentParser, ArgumentTypeError, Namespace
+from sys import argv
+from cases import growth_rate_gen, boundary_gen
+from typing import Union
+
+
+def usage() -> int:
+    print(
+        """USAGE
+    ./106bombyx n [k | i0 i1]
+DESCRIPTION
+    n number of first generation individuals
+    k growth rate from 1 to 4
+    i0 initial generation (included)
+    i1 final generation (included)"""
+    )
+    return 0
+
+
+def positive_int(value: str) -> int:
+    try:
+        convert_value: int = int(value)
+    except ValueError:
+        raise ArgumentTypeError(f"{value} is not an positive integer.")
+
+    if convert_value < 0:
+        raise ArgumentTypeError(f"{value} is not an positive integer.")
+    return convert_value
+
+
+def get_args() -> Namespace:
+    parser: ArgumentParser = ArgumentParser()
+
+    parser.add_argument("n", type=positive_int)
+    parser.add_argument("arg1", type=float)
+    parser.add_argument("arg2", type=positive_int, nargs="?")
+
+    try:
+        args: Namespace = parser.parse_args()
+    except SystemExit:
+        exit(84)
+
+    if args.arg2 == None:
+        if args.arg1 < 1 or args.arg1 > 4:
+            exit(84)
+    else:
+        if int(args.arg1) >= args.arg2:
+            exit(84)
+        if int(args.arg1) < 1:
+            exit(84)
+
+    return args
+
+
+def main() -> int:
+    if "-h" in argv:
+        return usage()
+    args: Namespace = get_args()
+    if args.arg2 == None:
+        growth_rate_gen(args.n, args.arg1)
+    else:
+        boundary_gen(args.n, int(args.arg1), args.arg2)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())

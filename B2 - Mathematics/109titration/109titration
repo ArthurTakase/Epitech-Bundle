@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+from argparse import ArgumentParser, Namespace, ArgumentTypeError
+from os import path, stat
+from typing import List
+from calcul import *
+
+
+def correct_file(value: str) -> str:
+    if not path.exists(value):
+        raise ArgumentTypeError(f"{value} is not a valid argument.")
+    if stat(value).st_size == 0:
+        raise ArgumentTypeError(f"{value} is not a valid argument.")
+    return value
+
+
+def get_args() -> List[List[float]]:
+    parser: ArgumentParser = ArgumentParser()
+
+    parser.add_argument(
+        "file", type=correct_file, help="a csv file containing “vol;ph” lines"
+    )
+
+    try:
+        args: Namespace = parser.parse_args()
+    except SystemExit:
+        exit(84)
+
+    file = open(args.file, "r")
+    file_first_split = file.read().split("\n")
+    value_list = []
+    for i in range(len(file_first_split)):
+        if file_first_split[i] != "":
+            value_list.append(file_first_split[i].split(";"))
+
+    for i in range(len(value_list)):
+        for j in range(len(value_list[i])):
+            try:
+                value_list[i][j] = float(value_list[i][j])
+            except:
+                print("Error: mauvaises valeurs dans le fichier demandé")
+                exit(84)
+
+    return value_list
+
+
+def main() -> int:
+    args: List[List[float]] = get_args()
+
+    print("Derivative:")
+    derivate_part(args, 1)
+    first_eq_value: float = find_equivalence(args)
+
+    print("\nSecond derivative:")
+    derivate_part(args, 3)
+
+    print("\nSecond derivative estimated:")
+    estimated_list: List[List[float]] = estimated_derivative(args, first_eq_value)
+    find_equivalence_by_zero(estimated_list)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())
