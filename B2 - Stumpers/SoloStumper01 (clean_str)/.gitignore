@@ -1,0 +1,7 @@
+
+*.html
+NormEZ.rb
+*.o
+unit_tests
+*.gcda
+*.gcno

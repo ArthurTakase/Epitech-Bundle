@@ -1,0 +1,6 @@
+
+*.rb
+*.gcda
+*.gcno
+*.o
+*.html
