@@ -1,0 +1,5 @@
+lib/
+!src/lib/
+*.json
+*.o
+*.rb

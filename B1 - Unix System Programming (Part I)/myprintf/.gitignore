@@ -1,0 +1,12 @@
+*.sh
+*.out
+.tmp_versions/
+.git/
+*.rb
+*.gcno
+*.gcda
+*.o
+./unit_tests
+unit_tests
+unit_tests
+test.c

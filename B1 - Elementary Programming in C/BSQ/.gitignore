@@ -1,0 +1,13 @@
+bsq
+push_that.sh
+libmy.a
+gen.pl
+*.json
+ok
+vgcore.10284
+mouli_maps/
+*.o
+*.html
+*.html
+gcovr/bsq.html
+unit_tests

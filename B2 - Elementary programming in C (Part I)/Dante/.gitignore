@@ -1,0 +1,9 @@
+*.o
+compile_commands.json
+.cache/
+*x*_maze
+*.gc*
+unit-tests
+gcovr/
+generator/generator
+solver/solver
