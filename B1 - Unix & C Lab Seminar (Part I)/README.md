@@ -1,4 +1,4 @@
-# {Epitech} Tek 1
+# Cpool Part 1 {Epitech}
 
 **Attention au -42.** Servez vous de ce repo pour vous orienter si vous avez des difficultés, *tricher ne vous apportera rien.*
 
@@ -8,6 +8,6 @@ Je rappel également que les codes présents ici n'ont pas été corrigés suite
 
 Chaque dossier possède son propre README.md avec des informations sur les projets concernés. Si vous bloquez, lisez le avant d'aller regarder le code. C'est toujours mieux de comprendre que de copier.
 
-Si vous avez des questions en plus de cela, n'hésitez pas à demander aux personnes autour de vous et aux AER. En dernier recours, je suis disponible sur discord pour répondre à vos questions (**Takase#0069**).
+La piscine est là pour apprendre, ce n'est pas grave si vous ratez des exercices ou que le score à la fin de la journée n'est pas bon. Le plus important c'est de comprendre ce que vous avez fait et pourquoi vous avez raté.
 
 Have Fun !
