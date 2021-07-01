@@ -2,6 +2,11 @@
 
 Le but du projet **101pong** est de calculer, à partir de vecteurs, la position d'une balle dans un espace en trois dimensions, ainsi que l'angle de rebond sur un mur placé en (0;0).
 
+## Note
+
+| MyEpitech |
+|--|
+| 96.8% |
 
 ## Détails supplementaires
 
