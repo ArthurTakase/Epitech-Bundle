@@ -25,4 +25,4 @@ Une manière simple de transférer les coordonnées est de le faire de la maniè
 |--|--|--|--|
 | 11 | 2 |11111 | 2 |
 
-Sachez également que la contrainte d'une seule variable globale peut être contourner en vous servant d'une structure.
+Sachez également que la contrainte d'une seule variable globale peut être contournée en vous servant d'une structure.
