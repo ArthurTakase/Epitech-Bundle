@@ -7,7 +7,7 @@ Je rappel également que les codes présents ici n'ont pas été corrigés suite
 ## Note
 
 | MyEpitech | Norme |
-|--|--|--|
+|--|--|
 | 85% | 0 fautes |
 
 ## Informations
