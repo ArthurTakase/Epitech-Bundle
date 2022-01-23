@@ -6,8 +6,6 @@ Je rappel également que les codes présents ici n'ont pas été corrigés suite
 
 ## Informations
 
-Chaque dossier possède son propre README.md avec des informations sur les projets concernés. Si vous bloquez, lisez le avant d'aller regarder le code. C'est toujours mieux de comprendre que de copier.
-
-Si vous avez des questions en plus de cela, n'hésitez pas à demander aux personnes autour de vous et aux AER. En dernier recours, je suis disponible sur discord pour répondre à vos questions (**Takase#0069**).
+Chaque dossier possède son propre README.md avec des informations sur les projets concernés.
 
 Have Fun !
