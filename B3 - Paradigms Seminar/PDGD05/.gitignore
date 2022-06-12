@@ -1,0 +1,7 @@
+main.c
+*.a
+/include
+*.o
+a.out
+.vscode
+string.h

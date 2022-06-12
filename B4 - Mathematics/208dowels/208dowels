@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+# from src.args import Arguments
+from src.dowels import dowels
+from src.args import parse_args
+from typing import List
+
+
+def entrypoint() -> int:
+    args: List[int] = parse_args()
+    return dowels(args)
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

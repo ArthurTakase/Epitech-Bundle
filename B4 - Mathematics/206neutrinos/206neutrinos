@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+from src.args import Arguments
+from src.neutrinos import neutrinos
+from src.args import parse_args
+
+
+def entrypoint() -> int:
+    args: Arguments = parse_args()
+    neutrinos(args)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

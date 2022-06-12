@@ -1,0 +1,9 @@
+*.o
+arcade
+*.so
+nudes/
+.vscode/
+test_ncurses.cpp
+a.out
+error.txt
+arcade.score

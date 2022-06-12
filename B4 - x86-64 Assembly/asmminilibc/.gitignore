@@ -1,0 +1,12 @@
+a.out
+*.so
+*.o
+*.gcno
+.vscode/
+unit_tests
+*.gcno
+*.gcda
+test
+Fonctions
+Makefile1
+main.c

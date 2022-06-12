@@ -1,0 +1,12 @@
+*.o
+*.gcda
+*.gcno
+vgcore*
+.vscode
+a.out
+.zip/
+# main_test.cpp
+nanotekspice
+test
+# *.nts
+coucou

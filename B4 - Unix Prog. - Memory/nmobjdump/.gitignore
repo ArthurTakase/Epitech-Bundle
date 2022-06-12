@@ -1,0 +1,11 @@
+*.o
+my_objdump
+my_nm
+a.out
+NormEZ.rb
+nm/src_temp
+.vscode
+my_result
+our_result
+Notes.txt
+test.c

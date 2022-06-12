@@ -1,0 +1,5 @@
+*.o
+*.hi
+text
+pushswap_checker
+test.hs

@@ -1,0 +1,5 @@
+*.txt
+.vscode
+main.cpp
+a.out
+ASCII

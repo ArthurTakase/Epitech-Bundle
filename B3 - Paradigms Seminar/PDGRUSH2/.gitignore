@@ -1,0 +1,14 @@
+ex01.c
+ex02.c
+ex03.c
+ex04.c
+ex05.c
+player.c
+*.h
+a.out
+.vscode
+!list.h
+!bonus/container.h
+NormEZ.rb
+object_*
+# *.c

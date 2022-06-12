@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+from sys import argv
+from args import getArgs, myExit
+from formules import calcul, straight, full
+
+def main():
+    dices = getArgs()
+
+    try:
+        int(dices)
+        return 84
+    except:
+        pass
+    
+    command = argv[6].split("_")
+
+    func = {
+        "pair": [calcul, 2, "pair"],
+        "three": [calcul, 3, "three-of-a-kind"],
+        "four": [calcul, 4, "four-of-a-kind"],
+        "full": [full, 0, "full of"],
+        "straight": [straight, 0, "straight"],
+        "yams": [calcul, 5, "yams"]
+    }
+    
+    if command[0] == "full" and len(command) == 3: #fonction qui prend 2 arguments
+        if int(command[1]) > 6 or int(command[2]) > 6 or int(command[1]) < 1 or int(command[2]) < 1:
+            return myExit("mauvaises valeurs dans la formule")
+        print(f"Chances to get a {command[1]} {func[command[0]][2]} {command[2]}: ", end="")
+        func[command[0]][0](dices, int(command[1]), int(command[2]))
+    elif len(command) == 2: # fonctions avec un seul argument
+        if int(command[1]) > 6 or int(command[1]) < 1:
+            return myExit("mauvaises valeurs dans la formule")
+        print(f"Chances to get a {command[1]} {func[command[0]][2]}: ", end="")
+        func[command[0]][0](func[command[0]][1], int(command[1]), dices)
+
+if __name__ == "__main__":
+    exit(main())

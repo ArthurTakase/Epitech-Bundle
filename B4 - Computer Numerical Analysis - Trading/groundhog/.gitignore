@@ -1,0 +1,7 @@
+groundhog
+__pycache__
+.pytest_cache
+help*
+*.pdf
+*cache
+.coverage

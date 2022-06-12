@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+from src.args import parse_args, Argument
+from src.hotline import main
+
+
+def entrypoint() -> int:
+    args: Argument = parse_args()
+    return main(args)
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

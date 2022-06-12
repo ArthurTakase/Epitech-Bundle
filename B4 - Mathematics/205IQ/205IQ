@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+from src.args import parse_args
+from src.compute import launch205
+
+
+def entrypoint() -> int:
+    args = parse_args()
+    launch205(args)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

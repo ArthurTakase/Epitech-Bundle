@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['getbackgroundcolor_61',['getBackgroundColor',['../class_i_game.html#a7bfba44cf77ff4cc21e36fec9dfad5fe',1,'IGame::getBackgroundColor()'],['../class_a_game.html#ae4088b0e4d2271ad6583483c35ab8c47',1,'AGame::getBackgroundColor()']]],
+  ['getdisplay_62',['getDisplay',['../class_i_game.html#a111ea7d97088e1498dbd22b26bae25f3',1,'IGame::getDisplay()'],['../class_nibbler.html#a854825ed438dfda3aa743175f35041ec',1,'Nibbler::getDisplay()'],['../class_solar_fox.html#aa69cee6cf4fdaef4640d3efddbcb46de',1,'SolarFox::getDisplay()']]],
+  ['getinput_63',['getInput',['../class_i_library.html#a62d98afcf0693ba6c5efb21a1cdb1846',1,'ILibrary::getInput()'],['../class_ncurses.html#af8fc5a1212331a9e688302cc519e426a',1,'Ncurses::getInput()'],['../class_s_d_l2.html#a5eb1754f7a0972edad9ab1db332268dc',1,'SDL2::getInput()'],['../class_s_f_m_l.html#acdf223450aec953266617f9e197af29b',1,'SFML::getInput()']]],
+  ['getmusic_64',['getMusic',['../class_i_game.html#ad40139fc1fbae111c8c14423476758a8',1,'IGame::getMusic()'],['../class_a_game.html#a54c27553b35a5678127b858668b4e901',1,'AGame::getMusic() const noexcept final']]],
+  ['getname_65',['getName',['../class_a_game.html#a4e06ad64d4a80a1d5ff44a6d07fc0e66',1,'AGame::getName()'],['../class_i_game.html#ad4bd26b588becf7b4996b9a2a112ea1e',1,'IGame::getName()'],['../class_i_library.html#ad53cc1384b0be0cec246ccd5f36794ff',1,'ILibrary::getName()'],['../class_ncurses.html#a2f703fa9070e6b59f07ed753124e0ebe',1,'Ncurses::getName()'],['../class_s_d_l2.html#a71c79ba3988ecab2823f098ae5b312e1',1,'SDL2::getName()'],['../class_s_f_m_l.html#ac0de76e18f05668adad8b9e4aff8f1c4',1,'SFML::getName()']]],
+  ['getscore_66',['getScore',['../class_a_game.html#af613eec7b125c923994bd4adf1c5c0d7',1,'AGame::getScore()'],['../class_i_game.html#ab272a6bd5599ff4999673cb075fe697c',1,'IGame::getScore()']]],
+  ['getstate_67',['getState',['../class_a_game.html#a68a2df10d338c96c4dec23e9ec0305ff',1,'AGame::getState()'],['../class_i_game.html#a79a5a4f3404068906534cb8d2f266ef8',1,'IGame::getState()']]]
+];

@@ -1,0 +1,6 @@
+.vscode
+a.out
+my_cat
+*.o
+my_convert*
+main.cpp
