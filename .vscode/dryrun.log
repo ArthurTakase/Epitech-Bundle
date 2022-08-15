@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/arthur/Documents/Epitech-Bundle'
-make: Leaving directory '/home/arthur/Documents/Epitech-Bundle'
- 
-make: *** No targets specified and no makefile found.  Stop.
-
