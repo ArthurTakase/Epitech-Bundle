@@ -1,0 +1,8 @@
+*.pdf
+*.txt
+panoramix
+.vscode/
+*.o
+coucou
+temp.c
+Untitled*
