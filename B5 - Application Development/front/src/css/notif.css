@@ -1,0 +1,61 @@
+.notif {
+    position: fixed;
+    z-index: 100;
+    top: -10rem;
+    right: 0;
+    animation: 5s linear notifAnim;
+    background: #43495e4b;
+    backdrop-filter: blur(10px);
+    margin-right: 10px;
+    border: solid var(--accent-color) .15rem;
+    border-top: none;
+    border-bottom-left-radius: .8rem;
+    border-bottom-right-radius: .8rem;
+}
+
+.notifTitle {
+    color: white;
+    background: var(--accent-color);
+    padding: .5rem;
+}
+
+.notifBody {
+    color: white;
+    padding: .5rem;
+}
+
+.notif.error {
+    border-color: var(--accent-color-error);
+}
+
+.notif.error .notifTitle {
+    background: var(--accent-color-error);
+}
+
+@keyframes notifAnim {
+    0% {
+        top: -10rem;
+    }
+    10% {
+        top: 0;
+    }
+    90% {
+        top: 0;
+    }
+    100% {
+        top: -10rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .notif {
+        border-top: solid;
+        border-radius: .8rem;
+        width: calc(100% - 20px - .3rem);
+        margin-top: 10px;
+    }
+    .notifTitle {
+        border-top-left-radius: .3rem;
+        border-top-right-radius: .3rem;
+    }
+}

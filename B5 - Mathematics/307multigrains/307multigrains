@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+from src.Parser import Parser
+from src.Multigrains import Multigrains
+
+if __name__ == "__main__":
+    args = Parser().args
+    Multigrains(args)

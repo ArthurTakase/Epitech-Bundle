@@ -1,0 +1,6 @@
+# config/sidekiq.yml
+
+:schedule:
+  HardJob:
+    cron: "0 * * * * *" # Runs once per minute
+    class: HardJob

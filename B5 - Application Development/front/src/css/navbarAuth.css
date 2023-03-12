@@ -1,0 +1,59 @@
+* {
+    font-family: 'Poppins', sans-serif
+}
+
+a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    color: var(--auth-buttons);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    transition-duration: .3s;
+    cursor: pointer;
+    background: none;
+    margin: .5rem;
+}
+
+.button:hover:not(.active) {
+    color: var(--accent-color);
+}
+
+.button.active {
+    background: var(--background-color);
+    border-radius: 1.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    box-shadow: var(--shadow);
+}
+
+.themeButton {
+    border: none;
+    color: none;
+    background: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+}
+
+svg {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.navbarAuth {
+    width: 100%;
+    border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .button {
+        font-size: 1rem;
+    }
+}

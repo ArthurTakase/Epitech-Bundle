@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+from src.args import parse_args
+from src.construction import Construction
+
+def entrypoint() -> int:
+    args = parse_args()
+    constru = Construction(args.tasks)
+    constru.compute()
+    constru.print()
+    return 0
+
+if __name__ == "__main__":
+    exit(entrypoint())

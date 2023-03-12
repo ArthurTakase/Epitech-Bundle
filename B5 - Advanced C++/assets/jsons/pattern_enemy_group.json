@@ -1,0 +1,220 @@
+[
+  [
+    {
+      "type": "basic",
+      "positions": [255, 30]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 50]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 50]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 60]
+    },
+    {
+      "type": "basic",
+      "positions": [340, 100]
+    },
+    {
+      "type": "basic",
+      "positions": [340, 120]
+    },
+    {
+      "type": "basic",
+      "positions": [340, 80]
+    },
+    {
+      "type": "basic",
+      "positions": [430, 170]
+    },
+    {
+      "type": "basic",
+      "positions": [430, 190]
+    },
+    {
+      "type": "basic",
+      "positions": [430, 210]
+    }
+  ],
+  [
+    {
+      "type": "boss",
+      "positions": [255, 100]
+    }
+  ],
+  [
+    {
+      "type": "boss",
+      "positions": [255, 100]
+    },
+    {
+      "type": "basic",
+      "positions": [400, 20]
+    },
+    {
+      "type": "basic",
+      "positions": [400, 40]
+    },
+    {
+      "type": "basic",
+      "positions": [600, 210]
+    },
+    {
+      "type": "basic",
+      "positions": [600, 180]
+    }
+  ],
+  [
+    {
+      "type": "boss",
+      "positions": [255, 100]
+    },
+    {
+      "type": "curve",
+      "positions": [400, 70]
+    },
+    {
+      "type": "curve",
+      "positions": [420, 100]
+    },
+    {
+      "type": "curve",
+      "positions": [440, 130]
+    }
+  ],
+  [
+    {
+      "type": "powerup",
+      "positions": [255, 30]
+    },
+    {
+      "type": "powerup",
+      "positions": [355, 130]
+    },
+    {
+      "type": "powerup",
+      "positions": [300, 200]
+    }
+  ],
+  [
+    {
+      "type": "basic",
+      "positions": [255, 20]
+    },
+    {
+      "type": "basic",
+      "positions": [275, 120]
+    },
+    {
+      "type": "curve",
+      "positions": [260, 70]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 70]
+    },
+    {
+      "type": "curve",
+      "positions": [310, 70]
+    }
+  ],
+  [
+    {
+      "type": "curve",
+      "positions": [255, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 80]
+    }
+  ],
+  [
+    {
+      "type": "curve",
+      "positions": [255, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [425, 180]
+    },
+    {
+      "type": "curve",
+      "positions": [435, 180]
+    },
+    {
+      "type": "curve",
+      "positions": [445, 180]
+    },
+    {
+      "type": "curve",
+      "positions": [455, 180]
+    }
+  ],
+  [
+    {
+      "type": "curve",
+      "positions": [255, 40]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 40]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 40]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 40]
+    },
+    {
+      "type": "basic",
+      "positions": [290, 110]
+    },
+    {
+      "type": "basic",
+      "positions": [300, 130]
+    },
+    {
+      "type": "basic",
+      "positions": [310, 150]
+    },
+    {
+      "type": "curve",
+      "positions": [255, 200]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 200]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 200]
+    }
+  ]
+]

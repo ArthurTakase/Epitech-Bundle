@@ -1,0 +1,130 @@
+{
+    "client": {
+        "host": "127.0.0.1"
+    },
+    "server": {
+        "services": [{
+            "name": "calendar",
+            "actions": [{
+                "name": "each_day",
+                "description": "Each day ...",
+                "options": {}
+            }, {
+                "name": "each_month",
+                "description": "Each month...",
+                "options": {}
+            }, {
+                "name": "each_hour",
+                "description": "Each hour...",
+                "options": {}
+            }, {
+                "name": "at_hour",
+                "description": "At such time ...",
+                "options": {
+                    "hour": "time"
+                }
+            }],
+            "reactions": []
+        }, {
+            "name": "weather",
+            "actions": [{
+                "name": "temperature_change",
+                "description": "When the temperature outside change ...",
+                "options": {
+                    "latitude": "location",
+                    "longitude": "location"
+                }
+            }, {
+                "name": "weather_change",
+                "description": "When the weather outside change ...",
+                "options": {
+                    "latitude": "location",
+                    "longitude": "location"
+                }
+            }],
+            "reactions": []
+        }, {
+            "name": "gmail",
+            "actions": [{
+                "name": "email_received",
+                "description": "When an email is received in the inbox... [Google account required]",
+                "options": {}
+            }],
+            "reactions": [{
+                "name": "send_mail",
+                "description": "An email is sent to the selected person/people [Google account required]",
+                "options": {
+                    "receiver": "text",
+                    "object": "text",
+                    "message": "text"
+                }
+            }]
+        }, {
+            "name": "theMovieDB",
+            "actions": [{
+                "name": "new_episode",
+                "description": "When a new episode is available...",
+                "options": {
+                    "show_id": "text"
+                }
+            }],
+            "reactions": [{
+                "name": "upcoming",
+                "description": "Get an email with the upcoming movies [Google account required]",
+                "options": {}
+            }, {
+                "name": "discover_movie",
+                "description": "Get and email with a movie recommandation [Google account required]",
+                "options": {
+                    "language": "text",
+                    "region": "text",
+                    "adult": "text",
+                    "min_date": "text",
+                    "min_score": "text"
+                }
+            }]
+        }, {
+            "name": "nasa",
+            "actions": [],
+            "reactions": [{
+                "name": "daily_photo_bg",
+                "description": "Add the daily photography from the NASA to the home page",
+                "options": {}
+            }, {
+                "name": "daily_photo_mail",
+                "description": "Send by email the photography from the NASA [Google account required]",
+                "options": {
+                    "email": "text"
+                }
+            }]
+        }, {
+            "name": "spotify",
+            "actions": [{
+                "name": "playlist_follow",
+                "description": "When playlist has a new follower...",
+                "options": {
+                    "playlist_id": "text"
+                }
+            }],
+            "reactions": [{
+                    "name": "like_playlist",
+                    "description": "Archive every song liked in a playlist [Spotify account required]",
+                    "options": {}
+                },
+                {
+                    "name": "new_album",
+                    "description": "Add the 5 newest album to the home page",
+                    "options": {}
+                }
+            ]
+        }, {
+            "name": "cat",
+            "actions": [],
+            "reactions": [{
+                "name": "cat",
+                "description": "Surprise",
+                "options": {}
+            }]
+        }]
+    }
+}

@@ -1,0 +1,792 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/users":
+    post:
+      summary: Register new user
+      tags:
+      - Connection
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    id: 4
+                    first_name: Adam
+                    last_name: Smasher
+                    email: adam.smash@email.com
+                    admin: false
+                    background:
+                    widgets: []
+        '422':
+          description: Unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                      example: Adam
+                    last_name:
+                      type: string
+                      example: Smasher
+                    email:
+                      type: string
+                      example: adam.smash@email.com
+                    password:
+                      type: string
+                      example: '12345'
+                    password_confirmation:
+                      type: string
+                      example: '12345'
+                  required:
+                  - first_name
+                  - last_name
+                  - email
+                  - password
+              required:
+              - user
+    get:
+      summary: Get all user
+      tags:
+      - Users as admin
+      security:
+      - bearer: {}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example_two_user:
+                  value:
+                  - id: 3
+                    first_name: Alain
+                    last_name: Provist
+                    email: al.pro@email.com
+                    admin: false
+                    background:
+                    widgets: []
+                  - id: 4
+                    first_name: Jean
+                    last_name: Michelle
+                    email: jean.michelle@email.com
+                    admin: false
+                    background:
+                    widgets:
+                    - id: 1
+                      name: Widget background
+                      active: true
+                    - id: 2
+                      name: Widget twitter
+                      active: true
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+                your_not_admin:
+                  value:
+                    error: You are not admin.
+    patch:
+      summary: Update user information
+      tags:
+      - Users
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '204':
+          description: user updated
+        '401':
+          description: unauthorize
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                bad_password:
+                  value:
+                    errors:
+                      current_password:
+                      - can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: new_email@email.com
+                    current_password:
+                      type: string
+                      example: '123456'
+                  required:
+                  - current_password
+              required:
+              - user
+  "/users/sign_in.json":
+    post:
+      summary: Sign in user
+      tags:
+      - Connection
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    message: Logged.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    error: Invalid Email or password.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properites:
+                    email:
+                      type: string
+                      example: adam.smash@email.com
+                    password:
+                      type: string
+                      example: '123456'
+                  required:
+                  - email
+                  - password
+              required:
+              - user
+  "/current_user":
+    get:
+      summary: Get current user
+      tags:
+      - Users
+      security:
+      - bearer: {}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    id: 1
+                    first_name: Adam
+                    last_name: Smasher
+                    email: adam.smasher@email.com
+                    admin: false
+                    background: https://apod.nasa.gov/apod/image/2210/LDN43_SelbyHanson_960.jpg
+                    widgets:
+                    - id: 41
+                      name: New background at 16h
+                      active: false
+                      action:
+                        id: 4
+                        name: at_hour
+                        options:
+                          hour: '16:00:00'
+                          action_id: 4
+                      reaction:
+                        id: 3
+                        name: daily_photo_bg
+                        options:
+                          reaction_id: 3
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+  "/users/{id}":
+    get:
+      summary: Get information user
+      tags:
+      - Users as admin
+      security:
+      - bearer: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    id: 1
+                    first_name: Adam
+                    last_name: Smasher
+                    email: adam.smasher@email.com
+                    admin: false
+                    background: https://apod.nasa.gov/apod/image/2210/LDN43_SelbyHanson_960.jpg
+                    widgets:
+                    - id: 41
+                      name: New background at 16h
+                      active: false
+                      action:
+                        id: 4
+                        name: at_hour
+                        options:
+                          hour: '16:00:00'
+                          action_id: 4
+                      reaction:
+                        id: 3
+                        name: daily_photo_bg
+                        options:
+                          reaction_id: 3
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+                your_not_admin:
+                  value:
+                    error: You are not admin.
+        '404':
+          description: user not found
+    patch:
+      summary: Update user information
+      tags:
+      - Users as admin
+      security:
+      - bearer: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    id: 1
+                    first_name: Adam
+                    last_name: Smasher
+                    email: jean.michelle@email.com
+                    admin: false
+                    background: https://apod.nasa.gov/apod/image/2210/LDN43_SelbyHanson_960.jpg
+                    widgets:
+                    - id: 41
+                      name: New background at 16h
+                      active: false
+                      action:
+                        id: 4
+                        name: at_hour
+                        options:
+                          hour: '16:00:00'
+                          action_id: 4
+                      reaction:
+                        id: 3
+                        name: daily_photo_bg
+                        options:
+                          reaction_id: 3
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+                your_not_admin:
+                  value:
+                    error: You are not admin.
+        '404':
+          description: user not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                      example: Jean-Jean
+                    last_name:
+                      type: string
+                      example: Sernine
+                    email:
+                      type: string
+                      example: jean.michelle@email.com
+                    password:
+                      type: string
+                      example: azerty
+                    admin:
+                      type: boolean
+                      example: true
+              required:
+              - user
+    delete:
+      summary: Delete user
+      tags:
+      - Users as admin
+      security:
+      - bearer: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: delete user
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+                your_not_admin:
+                  value:
+                    error: You are not admin.
+        '404':
+          description: user not found
+  "/users/reset_token":
+    get:
+      summary: Reset and send new token hashed
+      tags:
+      - Users
+      security:
+      - bearer: {}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    token: 897987ee7f0ed983570d19c17aab94a8cde3c4e53c57e3fb7f6366948997155b
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+  "/users/password.json":
+    put:
+      summary: Update user password
+      tags:
+      - Users
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '204':
+          description: password changed
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    current_password:
+                      type: string
+                      example: '123456'
+                    password:
+                      type: string
+                      example: azerty
+                    password_confirmation:
+                      type: string
+                      example: azerty
+                    reset_password_token:
+                      type: string
+                      example: rifdlghqgiufogoaeze43hyu8
+                  required:
+                  - current_password
+                  - password
+                  - password_confirmation
+                  - reset_password_token
+              required:
+              - user
+  "/signout":
+    delete:
+      summary: Sign out current user
+      tags:
+      - Connection
+      security:
+      - bearer: {}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    message: Logged out
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+  "/users/google_sign_in":
+    post:
+      summary: Register or sign in a user
+      tags:
+      - Connection
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                valid_code:
+                  value:
+                    message: Logged.
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                invalid_code:
+                  value:
+                    error: invalid_grant
+                    error_description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      example: 4/0AfgeXvtvzNummXDNRNVHSwtkNRmZ20Ha0DsVENfB1HF41HHUtBdtz-w02l7ci7mJQ86Kdg
+                    redirect_uri:
+                      type: string
+                      example: http://localhost:8081
+                  required:
+                  - code
+                  - redirect_uri
+              required:
+              - user
+  "/users/refresh_token":
+    post:
+      summary: Use code to get refresh token and add it to user
+      tags:
+      - Users
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              examples:
+                valid_code:
+                  value:
+                    message: Google token added to user
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                invalid_code:
+                  value:
+                    error: invalid_grant
+                    error_description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      enum:
+                      - google
+                      - spotify
+                      example: google
+                    code:
+                      type: string
+                      example: 4/0AfgeXvtvzNummXDNRNVHSwtkNRmZ20Ha0DsVENfB1HF41HHUtBdtz-w02l7ci7mJQ86Kdg
+                    redirect_uri:
+                      type: string
+                      example: http://localhost:8081
+                  required:
+                  - name
+                  - code
+                  - redirect_uri
+              required:
+              - refresh_token
+  "/widgets":
+    post:
+      summary: Create a widget
+      tags:
+      - Widgets
+      security:
+      - bearer: {}
+      parameters: []
+      responses:
+        '201':
+          description: widget created
+          content:
+            application/json:
+              examples:
+                example_request:
+                  value:
+                    id: 45
+                    name: New background at 16h
+                    active: true
+                    action:
+                      id: 8
+                      name: at_hour
+                      options:
+                        action_id: 8
+                        hour: '16:00:00'
+                    reaction:
+                      id: 8
+                      name: daily_photo_bg
+                      options: {}
+        '422':
+          description: unprocessable entity
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                widget:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: New Background at 16h
+                    action:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: at_hour
+                        options:
+                          type: object
+                          properties: {}
+                          example:
+                            hour: '16:00:00'
+                      required:
+                      - name
+                      - options
+                    reaction:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: daily_photo_bg
+                        options:
+                          type: object
+                          properties: {}
+                          example: {}
+                      required:
+                      - name
+                      - options
+                  required:
+                  - name
+                  - action
+                  - reaction
+              required:
+              - widget
+  "/widgets/{id}":
+    patch:
+      summary: Update a widget
+      tags:
+      - Widgets
+      security:
+      - bearer: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: widget modified
+          content:
+            application/json:
+              examples:
+                example_request:
+                  value:
+                    id: 45
+                    name: Other name
+                    active: true
+                    action:
+                      id: 8
+                      name: each_day
+                      options:
+                        action_id: 8
+                    reaction:
+                      id: 8
+                      name: daily_photo_bg
+                      options: {}
+        '422':
+          description: Unprocessable entity
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+        '404':
+          description: widget not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                widget:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Other name
+                    active:
+                      type: boolean
+                      example: true
+                    action:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: each_day
+                        options:
+                          type: object
+                          properties: {}
+                          example: {}
+                      required:
+                      - name
+                      - active
+                      - options
+                  required:
+                  - active
+              required:
+              - widget
+    delete:
+      summary: Destroy a widget
+      tags:
+      - Widgets
+      security:
+      - bearer: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: widget deleted
+        '404':
+          description: widget not found
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                your_not_logged:
+                  value:
+                    error: You need to be logged
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:8080

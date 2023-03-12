@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+from src.parser import parse_args
+from src.radiator import Radiator
+
+
+def entrypoint() -> int:
+    args = parse_args()
+    radiator = Radiator(args)
+    radiator.computeMap()
+    if args.i == None:
+        radiator.printMap()
+    radiator.computeVector()
+    if args.i == None:
+        radiator.printVector()
+    else:
+        radiator.printI()
+    return 0
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

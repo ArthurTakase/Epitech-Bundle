@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+    font-family: 'Poppins', sans-serif
+}
+
+.background {
+    background-image: url("../images/login_background.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.authContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: var(--background-color-fade);
+    border-radius: 1rem;
+    scale: 1.1;
+    animation: linear .5s opacity;
+    backdrop-filter: blur(10px);
+    height: fit-content;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+        translate: 0 10px;
+    }
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+.authContainer * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 2rem;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: grey;
+    margin-top: 2rem;
+    padding-bottom: .5rem;
+    text-align: center;
+}
+
+.socialNetworks {
+    border: none;
+    border-radius: .5rem;
+    background: var(--background-color);
+    display: block;
+    padding: .5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: .5rem;
+}
+
+.socialNetworks:hover {
+    cursor: pointer;
+}
+
+.socialNetworks svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+.twitter {
+    fill: rgb(29 161 242);
+}
+
+.fieldFormat {
+    font-size: 1rem;
+    border-radius: .5rem;
+    margin: .5rem;
+    padding-left: .5rem;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid var(--input-color);
+    color: var(--input-text);
+    background: var(--input-color);
+    display: block;
+    height: 36px;
+    width: 80%;
+}
+
+.fieldFormat:focus {
+    outline: none;
+}
+
+.fieldFormat:hover {
+    border-color: var(--border-hover);
+}
+
+.buttonFormat {
+    font-size: 1.1rem;
+    border: none;
+    border-radius: .5rem;
+    background: var(--auth-buttons);
+    color: white;
+    display: block;
+    width: auto;
+    padding: .5rem 3rem .5rem 3rem;
+    box-shadow: rgba(45, 45, 189, 0.81) 0px 7px 20px 0px;
+    transition-duration: .3s;
+}
+
+.buttonFormat:hover {
+    cursor: pointer;
+    scale: 1.05;
+}
+
+@media only screen and (max-width: 600px) {
+    .subtitle {
+        font-size: 1rem;
+    }
+    body {
+        animation: none;
+    }
+    .authContainer {
+        scale: 1;
+        margin: 1.5rem;
+    }
+    .fieldFormat {
+        width: 100%;
+    }
+}

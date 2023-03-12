@@ -1,0 +1,11 @@
+[
+    [{
+            "type": "basic",
+            "positions": [255, 30]
+        }
+    ],
+    [{
+        "type": "boss",
+        "positions": [200, 100]
+    }]
+]

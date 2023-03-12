@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.epitech.area"
+        version="1.0.0"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>iAREA</name>
+    <description>Version Android du projet AREA</description>
+    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">Le Feu de Camp</author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+    <access origin="*" />
+    <allow-navigation href="*"/>
+
+    <platform name="android">
+    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+        <application android:usesCleartextTraffic="true" />
+        <preference name="Scheme" value="http" />
+        <preference name="AndroidInsecureFileModeEnabled" value="true" />
+        <allow-intent href="http://*/*" />
+        <allow-intent href="https://*/*" />
+        <allow-intent href="*" />
+        <allow-navigation href="*"/>
+        <access origin="*" />
+        <feature name="InAppBrowser">
+            <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+        </feature>
+    </edit-config>
+    </platform>
+</widget>

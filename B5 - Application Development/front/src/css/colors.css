@@ -1,0 +1,35 @@
+.theme-dark {
+    --accent-color: rgb(100, 125, 248);
+    --accent-color-error: rgb(235, 83, 83);
+    --auth-buttons: rgb(122, 142, 241);
+    --background-color: #1a1c27;
+    --background-color-fade: rgba(26, 28, 39, 0.5);
+    --navbar-color: #212434;
+    --text-color: white;
+    --text-color-invert: white;
+    --navbar-light-color: #2a2f3e;
+    --error-text: #f70c37;
+    --error-background: #f70c373b;
+    --input-color: #1E202E;
+    --input-text: white;
+    --border-hover: #2a2f3e;
+    --shadow: 0 0 20px rgb(77, 74, 74);
+}
+
+.theme-light {
+    --accent-color: rgb(68 97 242);
+    --accent-color-error: rgb(235, 83, 83);
+    --auth-buttons: rgb(40 64 182);
+    --background-color: #ffffff;
+    --background-color-fade: rgba(255, 255, 255, 0.7);
+    --navbar-color: #ffffff;
+    --text-color: rgb(77, 77, 77);
+    --text-color-invert: white;
+    --navbar-light-color: #ffffff;
+    --error-text: #f70c37;
+    --error-background: #f70c373b;
+    --input-color: #dee1e2;
+    --input-text: black;
+    --border-hover: #ccc;
+    --shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+}

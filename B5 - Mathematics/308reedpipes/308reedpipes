@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+from src.reedpipes import main
+from src.args import Argument, parser
+
+
+def entrypoint() -> int:
+    args: Argument = parser()
+    return main(args)
+
+
+if __name__ == "__main__":
+    exit(entrypoint())

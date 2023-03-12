@@ -1,0 +1,39 @@
+#android toolbox image
+FROM mingc/android-build-box:latest
+
+#we set the working environment
+WORKDIR /
+
+#add necessary environment variables
+ENV GRADLE_USER_HOME /opt/gradle
+ENV PATH $PATH:$GRADLE_USER_HOME/bin
+
+#install Cordova version 11
+RUN npm i -g cordova@11.0.0
+
+#install Gradle version 7
+RUN curl -so /tmp/gradle-7.4.2-bin.zip https://downloads.gradle-dn.com/distributions/gradle-7.4.2-bin.zip && \
+    unzip -qd /opt /tmp/gradle-7.4.2-bin.zip && \
+    ln -s /opt/gradle-7.4.2 /opt/gradle
+
+#install project dependencies
+COPY package.json /
+COPY package-lock.json /
+
+#copy the build in the docker image
+COPY . .
+
+RUN npm install
+
+#create apk
+RUN npm run build
+# RUN cordova plugin add cordova-plugin-screen-orientation
+RUN cordova plugin add cordova-plugin-inappbrowser
+RUN cordova platform rm android
+RUN cordova platform add android
+RUN cordova build android --debug --buildConfig
+# RUN cordova build android --release --buildConfig
+
+#move the apk to the appropriate folder
+RUN mkdir -p /mobile_app/
+RUN cp platforms/android/app/build/outputs/apk/debug/app-debug.apk /mobile_app/client.apk

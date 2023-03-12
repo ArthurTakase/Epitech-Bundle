@@ -1,0 +1,24 @@
+FROM node:16-alpine
+
+#set un working directory
+WORKDIR /
+
+#add dependencies
+COPY package.json /
+COPY package-lock.json /
+
+#installer les dépendances
+RUN npm install
+
+#copy the build in the docker image
+COPY . .
+
+#expose port
+EXPOSE 8081
+
+#get the mobile apk
+RUN mkdir -p /mobile_app/
+RUN ln -s /mobile_app/client.apk public/client.apk
+
+#lancer l'app
+CMD ["npm", "start"]

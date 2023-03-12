@@ -1,0 +1,96 @@
+version: "3.9"
+
+services:
+  client_web:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.browser
+    depends_on:
+      - client_mobile
+      - server
+    ports:
+      - "8081:8081"
+    command: npm start
+    volumes:
+      - apk:/mobile_app/
+    environment:
+      - REACT_APP_GOOGLE_API_PUBLIC=786358951542-6embdk4g0midg0odojrc55fq969jrs0a.apps.googleusercontent.com
+      - REACT_APP_SPOTIFY_CLIENT_ID=d89d9e6d83484fc48fff9bc6791371c0
+
+  client_mobile:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.android
+    volumes:
+      - apk:/mobile_app/
+    environment:
+      - REACT_APP_GOOGLE_API_PUBLIC=786358951542-6embdk4g0midg0odojrc55fq969jrs0a.apps.googleusercontent.com
+      - REACT_APP_SPOTIFY_CLIENT_ID=d89d9e6d83484fc48fff9bc6791371c0
+
+  db:
+    image: "postgres:10-alpine"
+    volumes:
+      - "db:/var/lib/postgresql/data"
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  redis:
+    image: redis:4.0-alpine
+    command: redis-server
+    ports:
+      - 6379
+    volumes:
+      - "redis:/data"
+
+  sidekiq:
+    depends_on:
+      - db
+      - redis
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq
+    volumes:
+      - ./backend/:/rails-app
+    environment:
+      - DATABASE_HOST=db
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+      - SPOTIFY_CLIENT_ID=d89d9e6d83484fc48fff9bc6791371c0
+      - SPOTIFY_CLIENT_SECRET=e6d65483b28c4c1195b94f67ea6e03cf
+      - MOVIE_DB_KEY=29e2619a94b2f9dd0ca5609beac3eeda
+      - GOOGLE_CLIENT_ID=786358951542-6embdk4g0midg0odojrc55fq969jrs0a.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=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
+
+  server:
+    depends_on:
+      - db
+      - redis
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 8080 -b '0.0.0.0'"
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_HOST=db
+      - DEVISE_JWT_SECRET_KEY=a6ad96230292468e9bdb2b5d97206d8e6526fb706485e495dfdce612d73f23cfd2bb392c4ef9167688913008db0c6e68cdaf859534829eab5967605e4b357fdf
+      - TWITTER_API_PUBLIC=XeKpWymoE8bwWLElXHJVyMD4W
+      - TWITTER_API_SECRET=APP_SECRyEvZGxqYCFhqRVQtlxWnusyojL0tVsI2VDNQY3dpTpd0y5ijFJET
+      - GOOGLE_API_PUBLIC=786358951542-6embdk4g0midg0odojrc55fq969jrs0a.apps.googleusercontent.com
+      - GOOGLE_API_SECRET=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
+      - GOOGLE_CLIENT_ID=786358951542-6embdk4g0midg0odojrc55fq969jrs0a.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=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
+      - SPOTIFY_CLIENT_ID=d89d9e6d83484fc48fff9bc6791371c0
+      - SPOTIFY_CLIENT_SECRET=e6d65483b28c4c1195b94f67ea6e03cf
+      - MOVIE_DB_KEY=29e2619a94b2f9dd0ca5609beac3eeda
+    volumes:
+      - ./backend/:/rails-app
+      - bundle:/bundle
+
+volumes:
+  redis:
+  db:
+  apk:
+  bundle:
