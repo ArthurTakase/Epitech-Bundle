@@ -1,22 +1,4 @@
-```
- /$$$$$$$                        /$$              /$$                
-| $$__  $$                      | $$             | $/                
-| $$  \ $$  /$$$$$$  /$$$$$$$  /$$$$$$    /$$$$$$|_//$$$$$$$         
-| $$  | $$ |____  $$| $$__  $$|_  $$_/   /$$__  $$ /$$_____/         
-| $$  | $$  /$$$$$$$| $$  \ $$  | $$    | $$$$$$$$|  $$$$$$          
-| $$  | $$ /$$__  $$| $$  | $$  | $$ /$$| $$_____/ \____  $$         
-| $$$$$$$/|  $$$$$$$| $$  | $$  |  $$$$/|  $$$$$$$ /$$$$$$$/         
-|_______/  \_______/|__/  |__/   \___/   \_______/|_______/          
-                                                                     
-                                /$$$$$$   /$$                        
-                               /$$__  $$ | $$                        
-                              | $$  \__//$$$$$$    /$$$$$$   /$$$$$$ 
-                              |  $$$$$$|_  $$_/   |____  $$ /$$__  $$
-                               \____  $$ | $$      /$$$$$$$| $$  \__/
-                               /$$  \ $$ | $$ /$$ /$$__  $$| $$      
-                              |  $$$$$$/ |  $$$$/|  $$$$$$$| $$      
-                               \______/   \___/   \_______/|__/      
-```
+# Dante
 
 ## Note
 
@@ -24,31 +6,29 @@
 |--|--|
 | 60% | 1 minor | 11.1
 
-DESCRIPTION
----
+## DESCRIPTION
+
 This program can generate and solve mazes.
 
 You can generate a perfect maze or not. A perfect maze has 1 and only one solution.
 
 And you can solve mazes, you will always have the shortest solution.
 
-HOW TO USE
----
+## HOW TO USE
+
 To generate a maze type `./generator/generator [WIDTH] [HEIGHT] (perfect)`
 
 - WIDTH -> choose the width of your maze (at least 1)
-
 - HEIGHT -> choose the height of your maze (at least 1)
-
 - perfect -> It is an optional argument, if you want one and only one solution
 
 And to solve your maze type `./solver/solver [MAZE]`
 
 - MAZE -> the maze you want to solve
 
-EXAMPLE
----
-```
+## EXAMPLE
+
+```txt
 ./generator/generator 20 10 perfect
 
 *X***X*************X

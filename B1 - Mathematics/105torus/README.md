@@ -1,8 +1,5 @@
 # 105torus {Epitech}
 
-Le but du projet **105Torus** est de résoudre des équations du 4ème degrès à une inconnue à partir de différentes méthodes.
-
-
 ## Note
 
 | MyEpitech |
@@ -11,22 +8,28 @@ Le but du projet **105Torus** est de résoudre des équations du 4ème degrès �
 
 ## Objets supportés
 
-
 - The bisection method,
 - Newton’s method,
 - The secant method.
- 
 
-# How to
-> #### USAGE
-	./105torus opt a0 a1 a2 a3 a4 n
-> #### DESCRIPTION
-	opt -> method option:
-        1 for the bisection method
-        2 for Newton’s method
-        3 for the secant method
-    a[0-4] -> coefficients of the equation
-    n -> precision (the application of the polynomial to the solution should be smaller than 10ˆ-n)
+## How to
+
+### USAGE
+
+```bash
+./105torus opt a0 a1 a2 a3 a4 n
+```
+
+### DESCRIPTION
+
+```txt
+opt -> method option:
+    1 for the bisection method
+    2 for Newton’s method
+    3 for the secant method
+a[0-4] -> coefficients of the equation
+n -> precision (the application of the polynomial to the solution should be smaller than 10ˆ-n)
+```
 
 ### Lancer le programme
 
@@ -36,7 +39,8 @@ Pour lancer le jeu, faites la commande suivante :
 ### Exemple d'un résultat
 
 > **$**  ./105torus 1 -1 0 6 -5 1 6
-```
+
+```txt
 x = 0.5
 x = 0.75
 x = 0.625

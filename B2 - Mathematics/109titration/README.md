@@ -6,12 +6,18 @@
 |--|
 | 65% |
 
-# How to
-> #### USAGE
-	./107transfer [num den]*
-> #### DESCRIPTION
-    num     polynomial numerator defined by its coefficients
-    dem     polynomial denominator defined by its coefficients
+## How to
+
+### USAGE
+
+```bash
+./107transfer [num den]*
+```
+
+### DESCRIPTION
+
+- num :    polynomial numerator defined by its coefficients
+- dem :    polynomial denominator defined by its coefficients
 
 ### Lancer le programme
 
@@ -21,7 +27,8 @@ Pour lancer le programme, faites la commande suivante :
 ### Exemple d'un résultat
 
 > **$**  ./107transfer "0\*1\*2\*3*4" "1" > file && head -n 12 data
-```
+
+```txt
 0.000 -> 0.00000
 0.001 -> 0.00100
 0.002 -> 0.00201

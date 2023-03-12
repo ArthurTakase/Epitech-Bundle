@@ -1,9 +1,5 @@
 # Solo Stumper 3 {fozzbazz}
 
-**Attention au -42.** Servez vous de ce repo pour vous orienter si vous avez des difficultés, *tricher ne vous apportera rien.*
-
-Je rappel également que les codes présents ici n'ont pas été corrigés suite à leur création, **les erreurs que j'ai pu faire sont toujours dedans**, à vous de faire attention !
-
 Le but de ce stumper est d'afficher tous les entiers entre deux nombres en fonction de certaines règles.
 
 - The second parameter must be greater than or equal as the first one,
@@ -18,7 +14,7 @@ Le but de ce stumper est d'afficher tous les entiers entre deux nombres en fonct
 |--|--|
 | 100% | 0 fautes |
 
-# How to
+## How to
 
 ### Lancer le programme
 
@@ -28,7 +24,8 @@ Pour lancer le programme, faites la commande suivante :
 ### Exemple d'un résultat
 
 > **$**  ./fozzbazz 9 18
-```
+
+```txt
 Bazz
 Fozz
 11
