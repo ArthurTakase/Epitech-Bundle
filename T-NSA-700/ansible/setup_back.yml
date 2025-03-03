@@ -1,0 +1,18 @@
+---
+- hosts: back
+  tasks:
+    - name: Create project directory and set its permissions
+      become: true
+      file:
+        path: "/root/www/back"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        recurse: yes
+
+  roles:
+    - php
+    # - nginx_back
+    - composer
+    - nodejs
+    - yarn

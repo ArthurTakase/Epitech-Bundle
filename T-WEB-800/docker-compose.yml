@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  client:
+    container_name: client_container
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    environment:
+      MODE: ${MODE}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./front:/app
+
+  server:
+    container_name: server_container
+    build: ./api
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      HERE_API_KEY: ${HERE_API_KEY}
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api:/app
+    depends_on:
+      - db
+
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_vol:/var/lib/postgresql/data
+
+volumes:
+  db_vol:

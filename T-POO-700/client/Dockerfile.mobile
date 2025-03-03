@@ -1,0 +1,43 @@
+# FROM mingc/android-build-box:latest
+# FROM beevelop/cordova
+FROM beevelop/android:v2023.01.2
+
+WORKDIR /app
+
+RUN yes | sdkmanager --licenses --sdk_root=$ANDROID_SDK_ROOT
+RUN sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;30.0.3"
+RUN sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;33.0.2"
+
+# ENV MODE development
+
+# ENV ANDROID_HOME=/usr/local/android-sdk
+# ENV ANDROID_SDK_ROOT=/usr/local/android-sdk
+# ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# ENV PATH=${PATH}:${ANDROID_SDK_ROOT}/tools/bin:${ANDROID_SDK_ROOT}/platform-tools
+
+# RUN apt-get update && apt install -y wget unzip default-jre gradle default-jdk
+
+# RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
+# RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O sdk-tools.zip
+# RUN unzip sdk-tools.zip -d $ANDROID_SDK_ROOT
+
+# RUN ${ANDROID_SDK_ROOT}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "platform-tools"
+# RUN ${ANDROID_SDK_ROOT}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "platforms;android-30"
+RUN apt-get update && apt-get install -y nodejs npm
+
+# RUN npm i -g cordova
+RUN npm i -g cordova@11.0.0
+
+COPY . .
+
+WORKDIR /app/mobile
+
+RUN cordova telemetry on
+RUN cordova platform rm android
+RUN cordova platform add android
+
+# CMD ["cordova", "build", "android", "--debug", "--buildConfig"]
+
+RUN chmod +x /app/start_mobile.sh
+RUN /app/start_mobile.sh
+# CMD ["sleep", "3600000"]

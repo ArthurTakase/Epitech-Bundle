@@ -1,0 +1,10 @@
+---
+- name: install angular
+  become: true
+  shell: npm install -g angular
+- name: install ng
+  become: true
+  shell: npm install -g ng
+- name: install angular/cli
+  become: true
+  shell: npm install -g @angular/cli

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="Vuforia_RZR_Toy" motionHint="adaptive" trackingMode="car" optimizeTrackingFor="default"/>
+
+</Tracking>
+
+<Assembly name="Vuforia_RZR_Toys_assembly" assemblyId="82268f6d51c044f0a6a48c4a968ca66c">
+<Part name="Vuforia_RZR_Toy" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="Front" translation="0.00781676 0.0214802 0.333032" rotation="AD: 0.999842 0.0661904 -0.2867 204.976" trained="no">
+
+</EntryPoint>
+<EntryPoint name="Back" translation="0.0118575 0.0193761 0.325668" rotation="AD: 0.807008 -0.638155 2.5595 188.344" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>

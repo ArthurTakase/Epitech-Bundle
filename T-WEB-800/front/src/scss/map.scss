@@ -1,0 +1,25 @@
+#map {
+    position: absolute;
+    height: 100vh;
+    width: calc(100% - 33rem);
+    margin-left: 33rem;
+    overflow: hidden;
+    @media (max-width: 992px) {
+        width: calc(100% - 23rem);
+        margin-left: 26rem;
+    }
+    @media (max-width: 700px) {
+        height: calc(40vh - 10px - 3rem);
+        width: 100%;
+        margin-left: 0;
+        max-width: 100%;
+        margin-top: 3rem;
+    }
+    .mapContainer {
+        height: 100%;
+        width: 100%;
+    }
+    .leaflet-bottom.leaflet-right {
+        display: none;
+    }
+}

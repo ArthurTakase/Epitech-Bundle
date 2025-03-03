@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v6.1.1">
+        <ModelTarget name="Vuforia_MarsLander" targetId="71038201557a44038b49c75e0c74d6cb" bbox="-0.076974 0.000075 -0.054288 0.073280 0.110213 0.076523" version="13.0" toolVersion="v6.1.1" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="Vuforia_RZR_Toy" targetId="b3a90716b2524255aff5342e32b0fd0e" bbox="-0.044911 0.017595 -0.082495 0.042234 0.103702 0.081011" version="13.0" toolVersion="v6.1.1" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="Vuforia_MarsLander" assemblyId="e3ef56229e64418d92ac0e81aa2e2da9">
+        <Part name="Vuforia_MarsLander" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="Vuforia_RZR_Toy" assemblyId="5e415a1257da47c081f8fe26fe966b85">
+        <Part name="Vuforia_RZR_Toy" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <ModelTargetDatabase mtDBid="23437e7cef8a4edd83851c482270fd29" name="Vuforia_Marslander_RZR_Toy_Advanced" toolVersion="v6.1.1" version="36.0" />
+</QCARInfo>

@@ -1,0 +1,2003 @@
+{
+  "info": {
+    "version": "1.0",
+    "description": "API Documentation for the Epic Road Trip API",
+    "title": "Epic Road Trip API",
+    "contact": {
+      "name": "Arthur Decaen",
+      "email": "arthur.decaen@epitech.eu"
+    },
+    "termsOfService": "Open for public"
+  },
+  "host": "localhost:4000",
+  "definitions": {
+    "Location": {
+      "description": "Location details",
+      "example": {
+        "addresstype": "city",
+        "boundingbox": [
+          "44.8107826",
+          "44.9161806",
+          "-0.6386987",
+          "-0.5336838"
+        ],
+        "class": "boundary",
+        "display_name": "Bordeaux, Gironde, Nouvelle-Aquitaine, France métropolitaine, France",
+        "importance": 0.6740050666982947,
+        "lat": "44.841225",
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "lon": "-0.5800364",
+        "name": "Bordeaux",
+        "osm_id": 105270,
+        "osm_type": "relation",
+        "place_id": 252059258,
+        "place_rank": 16,
+        "type": "administrative"
+      },
+      "properties": {
+        "addresstype": {
+          "description": "Address type",
+          "type": "string"
+        },
+        "boundingbox": {
+          "description": "Bounding box",
+          "type": "array"
+        },
+        "class": {
+          "description": "Class",
+          "type": "string"
+        },
+        "display_name": {
+          "description": "Display name",
+          "type": "string"
+        },
+        "importance": {
+          "description": "Importance",
+          "type": "float"
+        },
+        "lat": {
+          "description": "Latitude",
+          "type": "string"
+        },
+        "licence": {
+          "description": "Licence",
+          "type": "string"
+        },
+        "lon": {
+          "description": "Longitude",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name",
+          "type": "string"
+        },
+        "osm_id": {
+          "description": "OSM ID",
+          "type": "integer"
+        },
+        "osm_type": {
+          "description": "OSM Type",
+          "type": "string"
+        },
+        "place_id": {
+          "description": "Place ID",
+          "type": "integer"
+        },
+        "place_rank": {
+          "description": "Place rank",
+          "type": "integer"
+        },
+        "type": {
+          "description": "Type",
+          "type": "string"
+        }
+      },
+      "title": "Location",
+      "type": "object"
+    },
+    "Api": {
+      "description": "Routes for easy access to the Here API",
+      "example": {
+        "access": [
+          {
+            "lat": 50.09873,
+            "lng": 8.68743
+          }
+        ],
+        "address": {
+          "city": "Frankfurt am Main",
+          "countryCode": "DEU",
+          "countryName": "Deutschland",
+          "county": "Frankfurt am Main",
+          "countyCode": "F",
+          "district": "Sachsenhausen",
+          "houseNumber": "50",
+          "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+          "postalCode": "60598",
+          "state": "Hessen",
+          "stateCode": "HE",
+          "street": "Mörfelder Landstraße"
+        },
+        "categories": [
+          {
+            "id": "800-8000-0000",
+            "name": "Hospital or Health Care Facility",
+            "primary": true
+          }
+        ],
+        "distance": 16
+      },
+      "title": "Api",
+      "type": "object"
+    },
+    "UserRequest": {
+      "description": "POST body for creating a user",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/User",
+          "description": "The user details"
+        }
+      },
+      "title": "UserRequest",
+      "type": "object"
+    },
+    "UserResponse": {
+      "description": "Response schema for single user",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/User",
+          "description": "The user details"
+        }
+      },
+      "title": "UserResponse",
+      "type": "object"
+    },
+    "ErrorResponse": {
+      "description": "Response schema for errors",
+      "properties": {
+        "error": {
+          "description": "Error message",
+          "type": "string"
+        }
+      },
+      "title": "ErrorResponse",
+      "type": "object"
+    },
+    "UsersResponse": {
+      "description": "Response schema for multiple users",
+      "properties": {
+        "data": {
+          "description": "The users details",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
+        }
+      },
+      "title": "UsersReponse",
+      "type": "object"
+    },
+    "SaveRequest": {
+      "description": "POST body for save",
+      "example": {
+        "data": "data (Baes64 array of object with id and name)"
+      },
+      "properties": {
+        "data": {
+          "description": "Data (Baes64 array of object with id and name)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "SaveRequest",
+      "type": "object"
+    },
+    "HereResponse": {
+      "description": "Response schema for Here API",
+      "properties": {
+        "data": {
+          "description": "The Here details",
+          "items": {
+            "$ref": "#/definitions/Here"
+          },
+          "type": "array"
+        }
+      },
+      "title": "HereResponse",
+      "type": "object"
+    },
+    "SaveDataResponse": {
+      "description": "Response schema for single save data",
+      "properties": {
+        "data": {
+          "description": "The decoded data (HERE API format)",
+          "items": {
+            "$ref": "#/definitions/Here"
+          },
+          "type": "array"
+        },
+        "save": {
+          "$ref": "#/definitions/Save",
+          "description": "The save details"
+        }
+      },
+      "title": "SaveDataResponse",
+      "type": "object"
+    },
+    "SavesResponse": {
+      "description": "Response schema for multiple saves",
+      "properties": {
+        "data": {
+          "description": "The save details",
+          "type": [
+            {
+              "$ref": "#/definitions/Save"
+            }
+          ]
+        }
+      },
+      "title": "SavesResponse",
+      "type": "object"
+    },
+    "SaveResponse": {
+      "description": "Response schema for single save",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Save",
+          "description": "The save details"
+        }
+      },
+      "title": "SaveResponse",
+      "type": "object"
+    },
+    "ApiResponse": {
+      "description": "Response schema for Here API",
+      "properties": {
+        "data": {
+          "description": "The Here details",
+          "items": {
+            "$ref": "#/definitions/Here"
+          },
+          "type": "array"
+        }
+      },
+      "title": "HereResponse",
+      "type": "object"
+    },
+    "AuthRequest": {
+      "description": "POST body for login",
+      "properties": {
+        "email": {
+          "description": "Email address",
+          "format": "email",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password",
+          "type": "string"
+        }
+      },
+      "required": [
+        "password",
+        "email"
+      ],
+      "title": "AuthRequest",
+      "type": "object"
+    },
+    "AuthResponse": {
+      "description": "Response schema for single user",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Auth",
+          "description": "The user details"
+        }
+      },
+      "title": "AuthResponse",
+      "type": "object"
+    },
+    "User": {
+      "description": "A user of the app",
+      "example": {
+        "email": "arthur@mail.com",
+        "id": 123,
+        "name": "Arthur",
+        "password": "123456"
+      },
+      "properties": {
+        "email": {
+          "description": "Email address",
+          "format": "email",
+          "type": "string"
+        },
+        "id": {
+          "description": "User ID",
+          "type": "integer"
+        },
+        "name": {
+          "description": "User name",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password",
+          "type": "string"
+        }
+      },
+      "required": [
+        "password",
+        "email",
+        "name"
+      ],
+      "title": "User",
+      "type": "object"
+    },
+    "Here": {
+      "description": "Here API",
+      "example": {
+        "access": [
+          {
+            "lat": 50.09873,
+            "lng": 8.68743
+          }
+        ],
+        "address": {
+          "city": "Frankfurt am Main",
+          "countryCode": "DEU",
+          "countryName": "Deutschland",
+          "county": "Frankfurt am Main",
+          "countyCode": "F",
+          "district": "Sachsenhausen",
+          "houseNumber": "50",
+          "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+          "postalCode": "60598",
+          "state": "Hessen",
+          "stateCode": "HE",
+          "street": "Mörfelder Landstraße"
+        },
+        "categories": [
+          {
+            "id": "800-8000-0000",
+            "name": "Hospital or Health Care Facility",
+            "primary": true
+          }
+        ],
+        "distance": 16
+      },
+      "title": "Here",
+      "type": "object"
+    },
+    "Auth": {
+      "description": "Login infos of an user of the app",
+      "example": {
+        "token": "token",
+        "user_id": 123,
+        "username": "username"
+      },
+      "properties": {
+        "token": {
+          "description": "Token",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "User ID",
+          "type": "integer"
+        },
+        "username": {
+          "description": "User name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_id",
+        "username"
+      ],
+      "title": "Auth",
+      "type": "object"
+    },
+    "Save": {
+      "description": "Save travel details",
+      "example": {
+        "code": "ABCDEF123456789",
+        "data": "data",
+        "id": 123,
+        "last_update": "2021-01-01T00:00:00Z",
+        "user": 123
+      },
+      "properties": {
+        "code": {
+          "description": "Code",
+          "type": "string"
+        },
+        "data": {
+          "description": "Data",
+          "type": "string"
+        },
+        "id": {
+          "description": "Save ID",
+          "type": "integer"
+        },
+        "last_update": {
+          "description": "Last update",
+          "type": "utc_datetime"
+        },
+        "user": {
+          "description": "User ID",
+          "type": "id"
+        }
+      },
+      "required": [
+        "user",
+        "data"
+      ],
+      "title": "Save",
+      "type": "object"
+    }
+  },
+  "schemes": [
+    "http",
+    "https",
+    "ws",
+    "wss"
+  ],
+  "paths": {
+    "/api/browse": {
+      "get": {
+        "deprecated": false,
+        "description": "Get events around a location",
+        "operationId": "browse",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Category (see https://www.here.com/docs/bundle/geocoding-and-search-api-developer-guide/page/topics-places/places-category-system-full.html)",
+            "in": "query",
+            "name": "cat",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Limit (default 20)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HereResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Browse"
+        ]
+      }
+    },
+    "/api/browse_in": {
+      "get": {
+        "deprecated": false,
+        "description": "Get events in a bounding box",
+        "operationId": "browse_in",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude",
+            "in": "query",
+            "name": "west_lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude",
+            "in": "query",
+            "name": "south_lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude",
+            "in": "query",
+            "name": "east_lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude",
+            "in": "query",
+            "name": "north_lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Category (see https://www.here.com/docs/bundle/geocoding-and-search-api-developer-guide/page/topics-places/places-category-system-full.html)",
+            "in": "query",
+            "name": "cat",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Limit (default 20)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HereResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Browse"
+        ]
+      }
+    },
+    "/api/browse_route": {
+      "get": {
+        "deprecated": false,
+        "description": "Get events along a route",
+        "operationId": "browse_route",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Route (see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Category (see https://www.here.com/docs/bundle/geocoding-and-search-api-developer-guide/page/topics-places/places-category-system-full.html)",
+            "in": "query",
+            "name": "cat",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Limit (default 20)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HereResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Browse"
+        ]
+      }
+    },
+    "/api/drink": {
+      "get": {
+        "deprecated": false,
+        "description": "List of available bars",
+        "operationId": "drink",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude (for bounding box)",
+            "in": "query",
+            "name": "west_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude (for bounding box)",
+            "in": "query",
+            "name": "south_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude (for bounding box)",
+            "in": "query",
+            "name": "east_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude (for bounding box)",
+            "in": "query",
+            "name": "north_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "Route (for route, see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "MyApi"
+        ]
+      }
+    },
+    "/api/eat": {
+      "get": {
+        "deprecated": false,
+        "description": "List of available restaurants",
+        "operationId": "eat",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude (for bounding box)",
+            "in": "query",
+            "name": "west_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude (for bounding box)",
+            "in": "query",
+            "name": "south_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude (for bounding box)",
+            "in": "query",
+            "name": "east_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude (for bounding box)",
+            "in": "query",
+            "name": "north_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "Route (for route, see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "MyApi"
+        ]
+      }
+    },
+    "/api/enjoy": {
+      "get": {
+        "deprecated": false,
+        "description": "List of existing events|activities",
+        "operationId": "enjoy",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude (for bounding box)",
+            "in": "query",
+            "name": "west_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude (for bounding box)",
+            "in": "query",
+            "name": "south_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude (for bounding box)",
+            "in": "query",
+            "name": "east_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude (for bounding box)",
+            "in": "query",
+            "name": "north_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "Route (for route, see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "MyApi"
+        ]
+      }
+    },
+    "/api/location": {
+      "get": {
+        "deprecated": false,
+        "description": "Get location details for a city",
+        "operationId": "ApiWeb.LocationController.getLocation",
+        "parameters": [
+          {
+            "description": "City name/Address",
+            "in": "city",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Location"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Get location details",
+        "tags": [
+          "Location"
+        ]
+      }
+    },
+    "/api/saves": {
+      "get": {
+        "description": "Retrieve the list of saves",
+        "operationId": "index",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "code": "ABCDEF123456789",
+                    "data": "data",
+                    "id": 123,
+                    "last_update": "2021-01-01T00:00:00Z",
+                    "user": 123
+                  },
+                  {
+                    "code": "ABCDEF123456789",
+                    "data": "data",
+                    "id": 123,
+                    "last_update": "2021-01-01T00:00:00Z",
+                    "user": 123
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SavesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      },
+      "post": {
+        "description": "Create a new save",
+        "operationId": "create",
+        "parameters": [
+          {
+            "description": "Save",
+            "in": "body",
+            "name": "save",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "code": "ABCDEF123456789",
+                  "data": "data",
+                  "id": 123,
+                  "last_update": "2021-01-01T00:00:00Z",
+                  "user": 123
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HereResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      }
+    },
+    "/api/saves/code/{code}": {
+      "get": {
+        "description": "Retrieve a single save by code and decode its data",
+        "operationId": "get_by_code",
+        "parameters": [
+          {
+            "description": "Save Code",
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaveDataResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      }
+    },
+    "/api/saves/user/{user}": {
+      "get": {
+        "description": "Retrieve a list of saves by user",
+        "operationId": "get_by_user",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SavesResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      }
+    },
+    "/api/saves/{id}": {
+      "delete": {
+        "description": "Delete a single save",
+        "operationId": "deleteSave",
+        "parameters": [
+          {
+            "description": "Save ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      },
+      "get": {
+        "description": "Retrieve a single save",
+        "operationId": "show",
+        "parameters": [
+          {
+            "description": "Save ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaveResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      },
+      "put": {
+        "description": "Update a single save",
+        "operationId": "update",
+        "parameters": [
+          {
+            "description": "Save ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Save",
+            "in": "body",
+            "name": "save",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaveResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Save"
+        ]
+      }
+    },
+    "/api/sleep": {
+      "get": {
+        "deprecated": false,
+        "description": "List of available accommodations",
+        "operationId": "sleep",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude (for bounding box)",
+            "in": "query",
+            "name": "west_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude (for bounding box)",
+            "in": "query",
+            "name": "south_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude (for bounding box)",
+            "in": "query",
+            "name": "east_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude (for bounding box)",
+            "in": "query",
+            "name": "north_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "Route (for route, see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "MyApi"
+        ]
+      }
+    },
+    "/api/travel": {
+      "get": {
+        "deprecated": false,
+        "description": "List of available transports",
+        "operationId": "trvael",
+        "parameters": [
+          {
+            "description": "Latitude",
+            "in": "query",
+            "name": "lat",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "Longitude",
+            "in": "query",
+            "name": "lon",
+            "required": true,
+            "type": "float"
+          },
+          {
+            "description": "West Longitude (for bounding box)",
+            "in": "query",
+            "name": "west_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "South Latitude (for bounding box)",
+            "in": "query",
+            "name": "south_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "East Longitude (for bounding box)",
+            "in": "query",
+            "name": "east_lon",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "North Latitude (for bounding box)",
+            "in": "query",
+            "name": "north_lat",
+            "required": false,
+            "type": "float"
+          },
+          {
+            "description": "Route (for route, see https://github.com/heremaps/flexible-polyline)",
+            "in": "query",
+            "name": "route",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "items": [
+                    {
+                      "access": [
+                        {
+                          "lat": 50.09873,
+                          "lng": 8.68743
+                        }
+                      ],
+                      "address": {
+                        "city": "Frankfurt am Main",
+                        "countryCode": "DEU",
+                        "countryName": "Deutschland",
+                        "county": "Frankfurt am Main",
+                        "countyCode": "F",
+                        "district": "Sachsenhausen",
+                        "houseNumber": "50",
+                        "label": "Hno-Praxis Dr. med. Jens Miklitza, Mörfelder Landstraße 50, 60598 Frankfurt am Main, Deutschland",
+                        "postalCode": "60598",
+                        "state": "Hessen",
+                        "stateCode": "HE",
+                        "street": "Mörfelder Landstraße"
+                      },
+                      "categories": [
+                        {
+                          "id": "800-8000-0000",
+                          "name": "Hospital or Health Care Facility",
+                          "primary": true
+                        }
+                      ],
+                      "distance": 16
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "MyApi"
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieve the list of users",
+        "operationId": "list_users",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "email": "user1@gmail.com",
+                    "id": 1,
+                    "password": "Mot de passe Hashé",
+                    "username": "user1"
+                  },
+                  {
+                    "email": "user2@gmail.com",
+                    "id": 2,
+                    "password": "Mot de passe Hashé",
+                    "username": "user2"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UsersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "Create a new user",
+        "operationId": "create_user",
+        "parameters": [
+          {
+            "description": "The user details",
+            "in": "body",
+            "name": "user",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserRequest"
+            },
+            "x-example": {
+              "user": {
+                "email": "arthur@mail.com",
+                "password": "123456",
+                "username": "Arthur"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "arthur@mail.com",
+                  "id": 1,
+                  "password": "Mot de passe Hashé",
+                  "username": "Arthur"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/users/:id": {
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a user",
+        "operationId": "delete_user",
+        "parameters": [
+          {
+            "description": "The user ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content (Delete successful)"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      },
+      "get": {
+        "deprecated": false,
+        "description": "Retrieve a user",
+        "operationId": "get_user",
+        "parameters": [
+          {
+            "description": "The user ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "arthur@mail.com",
+                  "id": 1,
+                  "password": "Mot de passe Hashé",
+                  "username": "Arthur"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "Update a user",
+        "operationId": "update_user",
+        "parameters": [
+          {
+            "description": "The user ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The user details",
+            "in": "body",
+            "name": "user",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserRequest"
+            },
+            "x-example": {
+              "user": {
+                "email": "arthur@mail.com",
+                "password": "123456",
+                "username": "Arthur"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "arthur@mail.com",
+                  "id": 1,
+                  "password": "Mot de passe Hashé",
+                  "username": "Arthur"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/auth/login": {
+      "get": {
+        "deprecated": false,
+        "description": "Get a token for a user.",
+        "operationId": "login",
+        "parameters": [
+          {
+            "description": "The login details",
+            "in": "body",
+            "name": "user",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AuthRequest"
+            },
+            "x-example": {
+              "email": "arthur@mail.com",
+              "password": "123456"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "token": "token",
+                  "user_id": 123,
+                  "username": "username"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "examples": {
+              "application/json": {
+                "error": "user not found"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey",
+      "description": "API Token must be provided via `Authorization: Bearer ` header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Manipulation des données relatives aux utilisateurs"
+    },
+    {
+      "name": "Save",
+      "description": "Manipulation des données relatives aux sauvegardes des trajets"
+    },
+    {
+      "name": "MyApi",
+      "description": "Routes demandées dans le sujet. Elles se servent des routes de Browse"
+    },
+    {
+      "name": "Auth",
+      "description": "Route de Lgin"
+    },
+    {
+      "name": "Browse",
+      "description": "Routes liées à l'API Here"
+    },
+    {
+      "name": "Location",
+      "description": "Routes liées à l'API Nominatim OpenStreetMap"
+    }
+  ]
+}

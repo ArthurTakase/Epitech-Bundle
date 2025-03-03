@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  mobile_client:
+    container_name: mobile_container
+    platform: linux/amd64
+    build:
+      context: ./mobile
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api_client
+
+  api_client:
+    container_name: api_container
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_PORT
+
+  db:
+    container_name: postgres_container
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_PORT
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: no
+    ports:
+      - 8282:8282
+    command:
+      - "php"
+      - "-S"
+      - "[::]:8282"
+      - "-t"
+      - "/var/www/html"
+
+volumes:
+  postgres_data:

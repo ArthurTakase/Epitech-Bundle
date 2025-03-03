@@ -1,0 +1,14 @@
+---
+- name: Download Composer installer
+  become: true
+  ansible.builtin.get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer-setup.php
+    validate_certs: yes
+
+- name: Install Composer globally
+  become: true
+  ansible.builtin.command:
+    cmd: php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    creates: /usr/local/bin/composer
+

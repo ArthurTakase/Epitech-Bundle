@@ -1,0 +1,55 @@
+#leftPanel {
+    height: 100vh;
+    width: 30rem;
+    position: fixed;
+    left: 3rem;
+    z-index: 1;
+    background: white;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease-in-out;
+    @media (max-width: 992px) {
+        width: 23rem;
+    }
+    @media (max-width: 700px) {
+        top: 3rem;
+        width: 100%;
+        max-width: unset;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        padding-bottom: 10px;
+        height: 60vh;
+        overflow: hidden;
+    }
+    .LeftZoneHeader {
+        display: flex;
+        justify-content: space-around;
+        height: 2.5rem;
+        gap: 1px;
+        padding-bottom: 1px;
+        background: rgb(215, 215, 215);
+        button {
+            flex: 1;
+            border: none;
+            background: none;
+            cursor: pointer;
+            background: white;
+            &:hover {
+                color: #ff8e8f;
+                background: #f5f5f5;
+            }
+            &.active {
+                background: #ededed !important;
+            }
+        }
+    }
+    .tab {
+        padding: 0.7rem;
+        .tabElement {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
+}

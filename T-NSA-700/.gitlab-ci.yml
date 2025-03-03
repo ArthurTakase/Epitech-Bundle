@@ -1,0 +1,103 @@
+stages:
+  - build
+  - test
+  - deploy
+
+front build:
+  tags:
+    - ci
+  image: ubuntu:latest
+  stage: build
+  cache:
+    paths:
+      - app_front/node_modules/
+      - app_front/dist/
+  script:
+    - cd app_front
+    - apt-get update
+    - apt-get -y install python2 nodejs npm
+    - npm install --python=python2.7 --allow-root --unsafe-perm
+    - npm run build
+  artifacts:
+    paths:
+      - app_front/dist/
+
+front test:
+  tags:
+    - ci
+  image: ubuntu:latest
+  stage: test
+  cache:
+    paths:
+      - app_front/node_modules/
+      - app_front/dist/
+  dependencies:
+    - front build
+  script:
+    - cd app_front
+    - apt-get update
+    - apt-get -y install python2 nodejs npm wget
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - apt -y install ./google-chrome-stable_current_amd64.deb
+    - npm install --python=python2.7 --allow-root --unsafe-perm
+    - npm install typescript --save-dev
+    - npm install @types/jasmine@2.8.3 --save-dev
+    - npm run test
+
+.front release:
+  tags:
+    - ci
+  image: ubuntu:latest
+  stage: deploy
+  cache:
+    policy: pull
+    paths:
+      - app_front/node_modules/
+      - app_front/dist/
+  dependencies:
+    - front test
+  script:
+    - apt-get update
+    - apt-get -y install software-properties-common
+    - apt-add-repository ppa:ansible/ansible
+    - apt-get update --fix-missing
+    - apt-get install ansible -y
+    - ansible-playbook ansible/release_front.yml
+
+back build:
+  tags:
+    - ci
+  image: php:7.1-cli
+  stage: build
+  variables:
+    NODE_ENV: development
+  script:
+    - cd app_back
+    - apt-get update
+    - apt-get -y install nodejs npm unzip curl
+    - curl -sS https://getcomposer.org/installer -o composer-setup.php
+    - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    - npm install --allow-root --unsafe-perm
+    - composer update
+    - composer install --ignore-platform-reqs
+
+back test:
+  tags:
+    - ci
+  image: php:7.1-cli
+  stage: test
+  variables:
+    NODE_ENV: development
+  dependencies:
+    - back build
+  script:
+    - cd app_back
+    - apt-get update
+    - apt-get -y install nodejs npm unzip curl
+    - curl -sS https://getcomposer.org/installer -o composer-setup.php
+    - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    - npm install --allow-root --unsafe-perm
+    - composer update
+    - composer install --ignore-platform-reqs
+    - vendor/bin/phpunit ./tests/Unit
+

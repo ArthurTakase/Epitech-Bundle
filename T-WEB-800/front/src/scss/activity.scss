@@ -1,0 +1,82 @@
+.activity {
+    background: rgb(255, 255, 255);
+    border: solid 1px #e1e1e1;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    &.active {
+        border: solid 1px #ff8e8f;
+        background: #ff8e9014;
+    }
+    .title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: rgb(79, 79, 79);
+    }
+    .address {
+        font-size: 0.9rem;
+    }
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 0.4rem;
+        .category {
+            font-size: 0.85rem;
+            text-wrap: nowrap;
+            color: #ff8e8f;
+            &::after {
+                content: "•";
+                margin: 0 0.5rem;
+            }
+            &:last-child::after {
+                content: none;
+                margin: 0;
+            }
+        }
+    }
+    .links {
+        padding-top: 0.5rem;
+        display: flex;
+        gap: 0.2rem;
+        .linksTitle {
+            font-size: 0.8rem;
+            padding-right: 0.2rem;
+        }
+        a {
+            color: #ff8e8f;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+    }
+    .actions {
+        position: absolute;
+        bottom: -10px;
+        right: 10px;
+        display: flex;
+        gap: 5px;
+        .action {
+            border: solid #ff8e8f 1px;
+            color: #ff8e8f;
+            background: white;
+            border-radius: 5px;
+            padding: 0.3rem 0.5rem;
+            cursor: pointer;
+            transition: scale ease-in-out 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+            &:hover {
+                scale: 1.02;
+                background: darken(#ff8e8f, 5%);
+                color: white;
+            }
+        }
+    }
+}
+
+// #ff8e8f

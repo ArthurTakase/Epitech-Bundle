@@ -1,0 +1,32 @@
+.inputField {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-left: solid 1px rgba(212, 212, 212, 0);
+    input,
+    select {
+        margin: 0 10px;
+        padding: 0.2rem;
+        flex: 2;
+        border-bottom: 1px solid rgba(212, 212, 212, 0);
+        &:enabled {
+            border-bottom: 1px solid rgb(212, 212, 212);
+            color: black;
+        }
+    }
+    label {
+        margin: 0 10px;
+        padding: 0.2rem;
+        flex: 1;
+        font-weight: bold;
+        text-align: left;
+        overflow: hidden;
+    }
+}
+
+input {
+    color: black;
+}

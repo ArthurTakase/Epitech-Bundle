@@ -1,0 +1,18 @@
+run:
+    mix phx.server
+migrate:
+    mix ecto.migrate
+rollback:
+    mix ecto.rollback
+reload-db:
+    mix do ecto.drop, ecto.create, ecto.migrate
+update-deps:
+    mix deps.update --all
+# new-model:
+#       mix phx.gen.json Users User users username:string email:string 
+#       mix phx.gen.json Workingtimes Workingtime workingtimes start:utc_datetime end:utc_datetime user:references:users
+# new-migration:
+#       mix ecto.gen.migration update_posts_table
+# close-postgres:
+#       sudo lsof -i -P | grep :5432
+#       sudo kill -9 <PID>

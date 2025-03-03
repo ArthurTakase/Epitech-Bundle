@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Stick Mayonnaise sans conservateurs - Senchou",
+    "price": 30,
+    "description": "Retrouvez avec ces sticks de mayonnaise le vrai goût d'une bonne mayo' maison.",
+    "image": "mayo_stick"
+  },
+  {
+    "name": "Mayonnaise naturelle - Azaïs-Polito",
+    "price": 500,
+    "description": "Elaborée de façon traditionnelle cette mayonnaise aux œufs frais vous rappellera les mayonnaises d'antan.",
+    "image": "mayo_naturelle"
+  },
+  {
+    "name": "Mayonnaise à la Truffe Noire - Maison Dessis",
+    "price": 1295,
+    "description": "Une mayonnaise à la truffe noire qui accompagnera à merveille vos viandes et poissons.",
+    "image": "mayo_truffe"
+  },
+  {
+    "name": "Mayonnaise de Dijon, 235g",
+    "price": 199,
+    "description": "La mayonnaise de Dijon Amora, c'est la garantie d'une mayonnaise savoureuse et riche en goût.",
+    "image": "mayo_amora"
+  },
+  {
+    "name": "Mayonnaise 9.5GR X 200 Unités",
+    "price": 2750,
+    "description": "Mayonnaise en dose individuelle de 9.5gr. La boite de 200 unités.",
+    "image": "mayo_heinz"
+  }
+]

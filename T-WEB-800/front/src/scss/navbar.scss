@@ -1,0 +1,113 @@
+nav {
+    background: white;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #d7d7d7;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    @media (min-width: 701px) {
+        left: 0;
+        height: 100vh;
+        width: 3rem;
+        flex-direction: column;
+        box-shadow: unset;
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        position: absolute;
+        left: 0.7rem;
+        font-family: "Bebas Neue", sans-serif;
+        color: #ff8e8f;
+        cursor: default;
+        text-align: center;
+        .bigTitle {
+            display: block;
+        }
+        .smallTitle {
+            display: none;
+        }
+        @media (max-width: 380px) {
+            .bigTitle {
+                display: none;
+            }
+            .smallTitle {
+                display: block;
+            }
+        }
+        @media (min-width: 701px) {
+            rotate: -90deg;
+            text-wrap: nowrap;
+            width: 100%;
+            height: 3rem;
+            top: 0;
+            transform: translateX(-150%) translateY(0);
+            left: 0;
+            opacity: 0.5;
+            transition: opacity 0.5s ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    .leftZone {
+        height: 100%;
+        display: flex;
+        gap: 5px;
+        margin-right: 10px;
+        @media (min-width: 701px) {
+            flex-direction: column;
+            margin: 0;
+            margin-bottom: 10px;
+            justify-content: flex-end;
+            align-items: center;
+            height: auto;
+            width: 100%;
+            gap: 0;
+        }
+        button {
+            flex: 1;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: fit-content;
+            gap: 5px;
+            color: darken(#d7d7d7, 20%);
+            transition:
+                background 0.2s ease-in-out,
+                color 0.2s ease-in-out;
+            &:hover {
+                color: #ff8e8f;
+                background: #f5f5f5;
+            }
+            @media (min-width: 701px) {
+                width: 100%;
+                height: 3rem;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                flex-direction: column;
+            }
+            .btnIcon {
+                display: block;
+                font-size: 1.3rem;
+            }
+            .btnTitle {
+                text-wrap: nowrap;
+                display: none;
+            }
+        }
+    }
+}

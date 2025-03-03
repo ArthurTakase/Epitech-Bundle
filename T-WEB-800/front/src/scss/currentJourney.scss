@@ -1,0 +1,231 @@
+.journeyList {
+    max-height: calc(100vh - 9.4rem);
+    padding-top: 20px;
+    text-align: center;
+    color: #8d8c8c;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    padding-bottom: 20px;
+    @media (max-width: 700px) {
+        max-height: calc(60vh - 8.8rem);
+    }
+}
+
+.journeyTitle {
+    display: flex;
+    justify-content: space-between;
+    margin: -5px;
+    padding: 8px;
+    border-radius: 5px;
+    button:not(.disabled) {
+        cursor: pointer;
+        background: white;
+        border: solid 1px #ff8e8f;
+        border-radius: 5px;
+        color: #ff8e8f;
+        height: 1.5rem;
+        width: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
+        transition: scale ease-in-out 0.2s;
+        &:hover {
+            scale: 1.05;
+            background: darken(#ff8e8f, 5%);
+            color: white;
+        }
+        svg {
+            scale: 1.2;
+        }
+        @media screen and (max-width: 992px) and (min-width: 701px), screen and (max-width: 400px) {
+            span {
+                display: none;
+            }
+        }
+    }
+    button.disabled {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        border: solid 1px #d8d8d8;
+        margin-right: 15px;
+    }
+    .journeySaveExport {
+        display: flex;
+        gap: 5px;
+        button {
+            width: fit-content;
+            display: flex;
+            gap: 5px;
+        }
+    }
+    .journeyCode {
+        display: flex;
+        gap: 5px;
+        input {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-bottom: 1px solid #ff8e8f;
+            height: 1.5rem;
+            color: #ff8e8f;
+            font-size: 1rem;
+            background: transparent;
+            &::placeholder {
+                color: #ff8e90c5;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+.leaflet-routing-container.leaflet-bar.leaflet-control,
+.default-leaflet-infos {
+    background: white;
+    border: none;
+    border-top: solid 1px #d7d7d7;
+    border-left: solid 1px #d7d7d7;
+    border-radius: 0;
+    max-width: 28.5rem;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    left: 3rem;
+    margin: 0;
+    margin-top: 2rem;
+    max-height: 1.4rem;
+    min-height: 0;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+    transition:
+        max-height 0.5s,
+        max-width 0.5s,
+        padding 0.5s;
+    &:not(.default-leaflet-infos) {
+        z-index: 10;
+    }
+    &.default-leaflet-infos {
+        z-index: 2;
+        min-height: 20px;
+        max-height: 20px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        span {
+            font-size: 14px;
+            color: #8d8c8c;
+        }
+        h3 {
+            font-size: 14px;
+            padding-bottom: 1px;
+            padding-top: 1px;
+        }
+    }
+    @media (max-width: 992px) {
+        max-width: 21.5rem;
+    }
+    @media (max-width: 700px) {
+        width: 100%;
+        max-width: unset;
+        left: 0;
+        padding-left: 1rem;
+    }
+    &:hover {
+        max-height: 50vh;
+        overflow-y: scroll;
+        padding: 0.7rem;
+        @media (max-width: 700px) {
+            width: calc(100% - 1.4rem);
+        }
+    }
+    table {
+        width: 100%;
+        td {
+            // no wrap
+            white-space: nowrap;
+            max-width: 70vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    h3 {
+        margin: 0;
+        color: #ff8e8f;
+    }
+    h2 {
+        display: none;
+    }
+}
+
+.journeyActivity {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    .journeyActivityInfos {
+        width: 1.5rem;
+        .journetActivityBtns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            button {
+                cursor: pointer;
+                background: white;
+                border: solid 1px #ff8e8f;
+                border-radius: 5px;
+                color: #ff8e8f;
+                height: 1.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: scale ease-in-out 0.2s;
+                &:hover {
+                    scale: 1.05;
+                    background: darken(#ff8e8f, 5%);
+                    color: white;
+                }
+            }
+        }
+    }
+    .journeyActivityActivity {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        width: calc(100% - 1rem);
+        .activity {
+            margin: 0 !important;
+        }
+    }
+}
+
+.waypointActivity {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: bold;
+    div {
+        position: absolute;
+        bottom: 0.8rem;
+        height: 1rem;
+        width: 1rem;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 50%;
+        transform: rotate(10deg) translateX(0.25rem);
+        span {
+            position: absolute;
+            top: -0.75rem;
+        }
+    }
+}

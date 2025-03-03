@@ -1,0 +1,102 @@
+.modal {
+    background: rgba(0, 0, 0, 0.397);
+    backdrop-filter: blur(5px);
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1000;
+    .rodal-dialog {
+        border-radius: 0.5rem;
+        max-width: 100vw;
+        height: fit-content !important;
+        transition:
+            width 0.5s,
+            height 0.5s;
+        @media screen and (max-width: 768px) {
+            width: 80% !important;
+        }
+    }
+    .modalContent {
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-radius: 0.5rem;
+        background: white;
+        * {
+            width: 100%;
+        }
+        .space {
+            height: 0.5rem;
+        }
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            display: none;
+        }
+        button:not(.underlineBtn) {
+            border: none;
+            background: transparent;
+            border: #ff8e8f 1px solid;
+            color: #ff8e8f;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: scale 0.2s ease-in-out;
+            &:hover {
+                background: #ff8e8f;
+                color: white;
+                scale: 1.02;
+            }
+        }
+        .modalTitle {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff8e8f;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            svg {
+                width: 1.5rem;
+            }
+            span {
+                width: fit-content;
+            }
+        }
+        input {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-bottom: 1px solid #929191;
+            height: 1.5rem;
+            color: #929191;
+            &::placeholder {
+                color: #9291916e;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+        .underlineBtn {
+            border: none;
+            background: none;
+            width: fit-content;
+            padding: 0;
+            border-bottom: 1px solid #ff8e8f;
+            color: #ff8e8f;
+            cursor: pointer;
+            opacity: 0.8;
+            &:hover {
+                color: darken(#ff8e8f, 20%);
+                border-bottom: 1px solid darken(#ff8e8f, 20%);
+                opacity: 1;
+            }
+        }
+    }
+}

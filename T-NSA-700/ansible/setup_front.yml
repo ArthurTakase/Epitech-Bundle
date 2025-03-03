@@ -1,0 +1,17 @@
+---
+- hosts: front
+  tasks:
+    - name: Create project directory and set its permissions
+      become: true
+      file:
+        path: "/root/www/html"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        recurse: yes
+
+  roles:
+    # - nginx_front
+    - nodejs
+    - yarn
+    - angular

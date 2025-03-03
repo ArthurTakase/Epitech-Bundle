@@ -1,0 +1,68 @@
+version: "3.8"
+networks:
+  t-poo-700-bdx_1_default:
+    external: true
+    name: t-poo-700-bdx_1_default
+services:
+  client:
+    container_name: client_container
+    build:
+      context: ./client
+      dockerfile: Dockerfile.browser
+    environment:
+      MODE: ${MODE}
+    ports:
+      - "8080:8080"
+    networks:
+      - t-poo-700-bdx_1_default
+    volumes:
+      - ./client:/app
+  # mobile:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile.mobile
+  #   environment:
+  #     MODE: ${MODE}
+  #   depends_on:
+  #     - client
+  #   ports:
+  #     - "8081:8081"
+  #   networks:
+  #     - t-poo-700-bdx_1_default
+  #   volumes:
+  #     - ./client:/app
+  server:
+    container_name: server_container
+    build: ./api
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "4000:4000"
+    networks:
+      - t-poo-700-bdx_1_default
+    volumes:
+      - ./api:/app
+    depends_on:
+      - db
+  db:
+    container_name: pg_container
+    image: postgres
+    networks:
+      - t-poo-700-bdx_1_default
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: api_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_vol:/var/lib/postgresql/data
+volumes:
+  db_vol:
+    driver: local

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="10dp"
+    android:padding="5dp"
+    android:background="@drawable/radius"
+    android:backgroundTint="#000000">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/radius"
+        android:scaleType="centerCrop"
+        android:backgroundTint="#C3C3C3"
+        android:id="@+id/product_image"
+        android:contentDescription="ProductPicture"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Theau (occasion, très peu utilisé)"
+        tools:ignore="HardcodedText"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="5dp"
+        android:justificationMode="inter_word"
+        android:id="@+id/product_name"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#C3C3C3"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        tools:ignore="HardcodedText"
+        android:layout_marginHorizontal="10dp"
+        android:justificationMode="inter_word"
+        android:textColor="#C3C3C3"
+        android:id="@+id/product_description"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/radius"
+        android:backgroundTint="#AD606060"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:text="🛒 39,99€"
+        android:id="@+id/product_price"
+        />
+</LinearLayout>

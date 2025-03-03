@@ -1,0 +1,44 @@
+@media print {
+  .LeftZoneHeader,
+  .journeyTitle,
+  .leaflet-control-container,
+  .actions,
+  .links,
+  .journetActivityBtns,
+  .leftZone,
+  .explorerInput {
+    display: none !important;
+  }
+
+  .journeyList,
+  .explorerList {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  #leftPanel {
+    position: unset !important;
+    margin-left: 2.8rem !important;
+    width: calc(100vw - 3rem) !important;
+    page-break-before: always !important;
+  }
+
+  .journeyActivity,
+  .activity {
+    flex: 1 !important;
+    min-width: 30vw !important;
+    break-inside: avoid !important;
+  }
+
+  #map {
+    position: unset !important;
+    margin-left: 3rem !important;
+    width: calc(100vw - 3rem) !important;
+    height: 100vh !important;
+  }
+
+  .default-leaflet-infos,
+  .leaflet-routing-container.leaflet-bar.leaflet-control {
+    display: none;
+  }
+}

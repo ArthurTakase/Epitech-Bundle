@@ -1,0 +1,37 @@
+---
+- name: Add the PHP repository GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: https://packages.sury.org/php/apt.gpg
+    dest: /etc/apt/trusted.gpg.d/php.gpg
+    mode: '0644'
+
+- name: Add PHP repository
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list.d/php.list
+    line: "deb https://packages.sury.org/php/ {{ ansible_lsb.codename }} main"
+    create: yes
+
+- name: Update apt cache after adding new repository
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: install php
+  become: true
+  apt:
+    pkg:
+      - php7.1-fpm
+      - openssl
+      - php-common
+      - php-curl
+      - php-json
+      - php-mbstring
+      - php-mysql
+      - php-xml
+      - php-zip
+      - php7.1-common
+      - php7.1-bcmath
+      - php7.1-json
+      - php7.1-mbstring

@@ -1,0 +1,5 @@
+[front]
+34.163.200.112 ansible_user=glab ansible_ssh_private_key_file=/root/.ssh/id_rsa
+
+[back]
+34.163.131.57 ansible_user=glab ansible_ssh_private_key_file=/root/.ssh/id_rsa

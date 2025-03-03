@@ -1,0 +1,32 @@
+name: pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_HOST: "db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "api_dev"
+      MODE: "prod"
+      HERE_API_KEY: "UytOA6Y1WchKHoFiU8Pyk-QQQNtNNM9UgdIGaMnyjcA"
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: launch docker
+        run: docker compose up -d
+      - name: clean up (backend)
+        run: docker compose exec server mix clean; docker compose exec server mix deps.clean --all
+      - name: install dependencies (backend)
+        run: docker compose exec server mix deps.get
+      # - name: compile (backend)
+      #   run: docker compose exec server mix compile
+      - name: unit tests (backend)
+        run: docker compose exec server mix test
+      - name: unit tests (frontend)
+        run: docker compose exec client npm test
+        continue-on-error: true

@@ -1,0 +1,36 @@
+name: Deploy to production
+on:
+  push:
+    branches:
+      - API
+  # pull_request:
+  #   branches:
+  #   - API
+jobs:
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Install ssh key
+          run: |
+            mkdir -p ~/.ssh/
+            echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+          env: 
+            SSH_PRIVATE_KEY: "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYAAAAKAKmt5QCpre\nUAAAAAtzc2gtZWQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYA\nAAAEDqQTjop7+53Lll0QGfrlTmVox4IuITkl4LsoCuWERJYtw7gPgZuLE1PLQmoi7CSMIi\n7t0zXLzC3GE1sCai4sBgAAAAGG1heGVuY2UubGFiYmVAZXBpdGVjaC5ldQECAwQF\n-----END OPENSSH PRIVATE KEY-----"
+        - name: Copy code to server
+          run: scp -o StrictHostKeyChecking=no -r ${{ github.workspace }} root@${{ env.SSH_HOST }}:/home/omc/app
+          env:
+            SSH_HOST: 83.229.83.116
+        - name: Install global env
+          run: ssh root@${{ env.SSH_HOST }} "rm -rf /home/omc/app/T-POO-700-BDX_1/.env && cp -r /home/omc/app/T-POO-700-BDX_1/.env.example /home/omc/app/T-POO-700-BDX_1/.env"
+          env:
+            SSH_PRIVATE_KEY: "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYAAAAKAKmt5QCpre\nUAAAAAtzc2gtZWQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYA\nAAAEDqQTjop7+53Lll0QGfrlTmVox4IuITkl4LsoCuWERJYtw7gPgZuLE1PLQmoi7CSMIi\n7t0zXLzC3GE1sCai4sBgAAAAGG1heGVuY2UubGFiYmVAZXBpdGVjaC5ldQECAwQF\n-----END OPENSSH PRIVATE KEY-----"
+            SSH_HOST: 83.229.83.116
+        - name: Deploy to production
+          run: ssh root@${{ env.SSH_HOST }} "cd /home/omc/app/T-POO-700-BDX_1 && docker-compose build --no-cache && docker-compose down && docker-compose up -d"
+          env:
+            SSH_PRIVATE_KEY: "-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW\nQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYAAAAKAKmt5QCpre\nUAAAAAtzc2gtZWQyNTUxOQAAACDcO4D4GbixNTy0JqIuwkjCIu7dM1y8wtxhNbAmouLAYA\nAAAEDqQTjop7+53Lll0QGfrlTmVox4IuITkl4LsoCuWERJYtw7gPgZuLE1PLQmoi7CSMIi\n7t0zXLzC3GE1sCai4sBgAAAAGG1heGVuY2UubGFiYmVAZXBpdGVjaC5ldQECAwQF\n-----END OPENSSH PRIVATE KEY-----"
+            SSH_HOST: 83.229.83.116

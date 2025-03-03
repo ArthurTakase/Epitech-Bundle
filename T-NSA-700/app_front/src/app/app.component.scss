@@ -1,0 +1,45 @@
+h1,
+h2 {
+  text-align: center;
+}
+
+section {
+  width: 600px;
+  margin: auto;
+}
+
+code {
+  display: block;
+  padding: 30px;
+  font-size: 20px;
+}
+
+code.good-job-bro {
+  color: white;
+  background-color: green;
+}
+
+code.not-that-bad {
+  color: white;
+  background-color: orange;
+}
+
+code.argh {
+  color: white;
+  background-color: red;
+}
+
+article.msg {
+  clear: both;
+}
+
+article.msg strong {
+  float: left;
+  width: 200px;
+  margin: 10px 0px;
+}
+
+article.msg p {
+  float: left;
+  margin: 10px 0px;
+}

@@ -1,0 +1,56 @@
+{
+    "categories": [
+        {
+            "value": "200",
+            "label": "🎉 Sorties et Divertissements"
+        },
+        {
+            "value": "200-2100",
+            "label": "🎬 Cinéma"
+        },
+        {
+            "value": "200-2200",
+            "label": "🎭 Théâtre, Musique et Culture"
+        },
+        {
+            "value": "200-2300",
+            "label": "🎰 Jeux-Loterie-Paris"
+        },
+        {
+            "value": "300-3000",
+            "label": "🗼 Point de Repère-Attraction"
+        },
+        {
+            "value": "300-3100",
+            "label": "🖼 Musée"
+        },
+        {
+            "value": "350",
+            "label": "🏞 Naturel et Géographique"
+        },
+        {
+            "value": "500",
+            "label": "🏨 Hébergement"
+        },
+        {
+            "value": "550",
+            "label": "🌳 Loisirs et Plein Air"
+        },
+        {
+            "value": "600",
+            "label": "🛍 Shopping"
+        },
+        {
+            "value": "700",
+            "label": "🏢 Entreprises et Services"
+        },
+        {
+            "value": "700-7010",
+            "label": "🏧 Distributeur Automatique"
+        },
+        {
+            "value": "800-8000",
+            "label": "🏥 Hôpital ou Établissement de Santé"
+        }
+    ]
+}

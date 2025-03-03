@@ -39,3 +39,21 @@
 * B5 - Artificial Intelligence
 * B5 - Mathematics
 * B5 - Professional Communication
+
+## MSC 1
+
+* T-POO-700
+* T-DEV-700
+* T-DIT-700
+* T-ESP-700
+* T-NAS-700
+* T-WEB-800
+* T-DEV-811
+
+## MSC 2
+
+* T-IOT-901
+* T-VIR-901 (cf. Odysseus)
+* T-VIR-902 (WIP)
+* T-ESP-901 (cf. Untitled God Game)
+* T-AIA-902 (WIP)

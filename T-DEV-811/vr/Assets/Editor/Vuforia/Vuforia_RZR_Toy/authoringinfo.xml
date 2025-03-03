@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="27.0" toolVersion="10.18.5">
+<ModelTarget name="Vuforia_RZR_Toy" targetId="62efff1393cc40e19f704ea34ebf42de" version="14.0" toolVersion="10.18.5" bbox="-0.053611 -0.008179 -0.083658 0.051324 0.103782 0.084071" previewImage="62efff1393cc40e19f704ea34ebf42de_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="Vuforia_RZR_Toys_assembly" assemblyId="82268f6d51c044f0a6a48c4a968ca66c">
+<Part name="Vuforia_RZR_Toy" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="Front" translation="0.00781676 0.0214802 0.333032" rotation="AD: 0.999842 0.0661904 -0.2867 204.976" image="Vuforia_RZR_Toy_Front.png" trained="no">
+
+</EntryPoint>
+<EntryPoint name="Back" translation="0.0118575 0.0193761 0.325668" rotation="AD: 0.807008 -0.638155 2.5595 188.344" image="Vuforia_RZR_Toy_Back.png" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

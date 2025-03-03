@@ -1,0 +1,11 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 8080
+
+RUN chmod +x /app/start_client.sh
+
+ENTRYPOINT ["/app/start_client.sh"]
