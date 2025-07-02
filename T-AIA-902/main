@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+from src import parse_args
+from src.bruteforce import BruteforceMultiple
+from src.qtable import qtable
+from src.optimizer import Optimizer
+from src.taxi_dqn import run_deep_q, train_on_multiple_maps
+import glob
+
+
+def entrypoint():
+    args = parse_args()
+
+    if args.optimize_with_bayesian or args.optimize_with_variations:
+        print("🔍 Mode optimisation activé !")
+        optimizer = Optimizer(base_params=args)
+        best_params = optimizer.optimize()
+        print("\n🚀 Entraînement final avec les meilleurs paramètres trouvés...")
+        qtable(best_params)
+
+    elif args.bruteforce:
+        bruteforce = BruteforceMultiple(args, 100, "human")
+        bruteforce.launch()
+
+    elif args.deep_q:
+        if args.map_path is None and not args.skipTraining:
+            print("🌐 Entraînement sur toutes les cartes .map disponibles…")
+            maps = sorted(glob.glob("maps/*.map"))
+            train_on_multiple_maps(maps, args.training_episodes, args)
+        else:
+            run_deep_q(args)
+
+    else:
+        qtable(args)
+
+
+if __name__ == "__main__":
+    entrypoint()

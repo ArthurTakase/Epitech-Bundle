@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  taxi-app:
+    build: .
+    volumes:
+      - .:/app
+    command: ["./main"]

@@ -54,6 +54,6 @@
 
 * T-IOT-901
 * T-VIR-901 (cf. Odysseus)
-* T-VIR-902 (WIP)
+* T-VIR-902 (cf. SlyVR)
 * T-ESP-901 (cf. Untitled God Game)
-* T-AIA-902 (WIP)
+* T-AIA-902

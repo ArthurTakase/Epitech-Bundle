@@ -1,0 +1,5 @@
+/src/__pycache__/
+results/playing_results_*.png
+results/test_results_*.png
+.venv/
+exported/
